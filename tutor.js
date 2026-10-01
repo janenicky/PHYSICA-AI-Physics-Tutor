@@ -1,21 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-
     const form =
         document.getElementById("chat-form");
-
 
     const input =
         document.getElementById("chat-message");
 
-
     const sendButton =
         document.getElementById("chat-send");
 
-
     const messages =
         document.getElementById("messages");
-
 
     const currentTopic =
         document.getElementById("current-topic");
@@ -24,14 +19,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const WORKER_URL =
         "https://soft-frost-e73a.nikjena09-09.workers.dev/";
 
-    const params =
+    const urlParams =
         new URLSearchParams(
             window.location.search
         );
 
 
     const topic =
-        params.get("topic") ||
+        urlParams.get("topic") ||
         "General Physics";
 
 
@@ -42,206 +37,293 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    const conversation = [];
 
-  function formatAIResponse(text) {
+    function formatAIResponse(text) {
 
-    let safe = String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+        let source =
+            String(text);
 
-    safe = safe
-        .replace(
-            /\*\*(.*?)\*\*/g,
-            "<strong>$1</strong>"
-        )
+        const mathBlocks = [];
 
-        .replace(
-            /\*([^*]+)\*/g,
-            "<em>$1</em>"
-        )
 
-        .replace(
-            /`([^`]+)`/g,
-            "<code>$1</code>"
+        function saveMath(match) {
+
+            const index =
+                mathBlocks.length;
+
+            mathBlocks.push(match);
+
+            return `@@MATHBLOCK${index}@@`;
+
+        }
+
+
+        source = source.replace(
+            /\\\[[\s\S]*?\\\]/g,
+            saveMath
         );
 
 
-    const lines =
-        safe.split("\n");
+        source = source.replace(
+            /\$\$[\s\S]*?\$\$/g,
+            saveMath
+        );
 
+        source = source
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
 
-    let html = "";
+        source = source
 
-    let inList = false;
-    let listType = null;
+            .replace(
+                /\*\*(.*?)\*\*/g,
+                "<strong>$1</strong>"
+            )
 
+            .replace(
+                /`([^`]+)`/g,
+                "<code>$1</code>"
+            )
 
-    function closeList() {
-
-        if (!inList) {
-            return;
-        }
-
-        html +=
-            listType === "ol"
-                ? "</ol>"
-                : "</ul>";
-
-        inList = false;
-        listType = null;
-
-    }
-
-
-    for (let line of lines) {
-
-        const trimmed =
-            line.trim();
-
-
-
-        if (!trimmed) {
-
-            closeList();
-
-            html +=
-                '<div class="response-space"></div>';
-
-            continue;
-
-        }
-
-
-        if (trimmed.startsWith("## ")) {
-
-            closeList();
-
-            html +=
-                `<h3>${trimmed.slice(3)}</h3>`;
-
-            continue;
-
-        }
-
-
-        if (trimmed.startsWith("### ")) {
-
-            closeList();
-
-            html +=
-                `<h4>${trimmed.slice(4)}</h4>`;
-
-            continue;
-
-        }
-
-
-        if (trimmed.startsWith("# ")) {
-
-            closeList();
-
-            html +=
-                `<h2>${trimmed.slice(2)}</h2>`;
-
-            continue;
-
-        }
-
-
-        const numbered =
-            trimmed.match(
-                /^\d+\.\s+(.*)$/
+            .replace(
+                /\*([^*]+)\*/g,
+                "<em>$1</em>"
             );
 
+        const lines =
+            source.split("\n");
 
-        if (numbered) {
 
-            if (!inList || listType !== "ol") {
+        let html = "";
+
+        let inList = false;
+
+        let listType = null;
+
+
+        function closeList() {
+
+            if (!inList) {
+                return;
+            }
+
+
+            html +=
+                listType === "ol"
+                    ? "</ol>"
+                    : "</ul>";
+
+
+            inList = false;
+
+            listType = null;
+
+        }
+
+        for (let line of lines) {
+
+            const trimmed =
+                line.trim();
+
+            if (!trimmed) {
 
                 closeList();
 
-                html += "<ol>";
+                html +=
+                    '<div class="response-space"></div>';
 
-                inList = true;
-
-                listType = "ol";
+                continue;
 
             }
 
-            html +=
-                `<li>${numbered[1]}</li>`;
-
-            continue;
-
-        }
-
-
-        const bullet =
-            trimmed.match(
-                /^[-*•]\s+(.*)$/
-            );
-
-
-        if (bullet) {
-
-            if (!inList || listType !== "ul") {
+            if (
+                /^@@MATHBLOCK\d+@@$/.test(
+                    trimmed
+                )
+            ) {
 
                 closeList();
 
-                html += "<ul>";
 
-                inList = true;
+                const match =
+                    trimmed.match(
+                        /\d+/
+                    );
 
-                listType = "ul";
+
+                const index =
+                    Number(
+                        match[0]
+                    );
+
+
+                html +=
+                    `<div class="math-block">
+                        ${mathBlocks[index]}
+                    </div>`;
+
+
+                continue;
 
             }
 
-            html +=
-                `<li>${bullet[1]}</li>`;
+            if (
+                trimmed.startsWith("### ")
+            ) {
 
-            continue;
+                closeList();
+
+                html +=
+                    `<h4>${trimmed.slice(4)}</h4>`;
+
+                continue;
+
+            }
+
+
+            if (
+                trimmed.startsWith("## ")
+            ) {
+
+                closeList();
+
+                html +=
+                    `<h3>${trimmed.slice(3)}</h3>`;
+
+                continue;
+
+            }
+
+
+            if (
+                trimmed.startsWith("# ")
+            ) {
+
+                closeList();
+
+                html +=
+                    `<h2>${trimmed.slice(2)}</h2>`;
+
+                continue;
+
+            }
+
+            const numbered =
+                trimmed.match(
+                    /^\d+\.\s+(.*)$/
+                );
+
+
+            if (numbered) {
+
+                if (
+                    !inList ||
+                    listType !== "ol"
+                ) {
+
+                    closeList();
+
+                    html += "<ol>";
+
+                    inList = true;
+
+                    listType = "ol";
+
+                }
+
+
+                html +=
+                    `<li>${numbered[1]}</li>`;
+
+                continue;
+
+            }
+
+            const bullet =
+                trimmed.match(
+                    /^[-*•]\s+(.*)$/
+                );
+
+
+            if (bullet) {
+
+                if (
+                    !inList ||
+                    listType !== "ul"
+                ) {
+
+                    closeList();
+
+                    html += "<ul>";
+
+                    inList = true;
+
+                    listType = "ul";
+
+                }
+
+
+                html +=
+                    `<li>${bullet[1]}</li>`;
+
+                continue;
+
+            }
+
+            closeList();
+
+
+            html +=
+                `<p>${trimmed}</p>`;
 
         }
 
 
         closeList();
 
-        html +=
-            `<p>${trimmed}</p>`;
+
+        return html;
 
     }
 
-
-    closeList();
-
-
-    return html;
-
-}
     function addMessage(
         text,
-        type
+        type,
+        formatted = false
     ) {
 
         const message =
             document.createElement("div");
 
 
-        message.className =
-            `message ${type}`;
+        message.classList.add(
+            "message",
+            type
+        );
 
 
-        if (type === "ai") {
+        if (
+            type === "ai" &&
+            formatted
+        ) {
 
             message.innerHTML =
                 formatAIResponse(text);
 
         } else {
 
-            message.textContent =
+            const paragraph =
+                document.createElement("p");
+
+
+            paragraph.textContent =
                 text;
+
+
+            message.appendChild(
+                paragraph
+            );
 
         }
 
@@ -250,196 +332,185 @@ document.addEventListener("DOMContentLoaded", function () {
             message
         );
 
+
         if (
-    type === "ai" &&
-    window.MathJax &&
-    window.MathJax.typesetPromise
-) {
+            type === "ai" &&
+            window.MathJax &&
+            window.MathJax.typesetPromise
+        ) {
 
-    window.MathJax
-        .typesetPromise([message])
-        .catch(error => {
-            console.error(
-                "MathJax error:",
-                error
-            );
-        });
+            window.MathJax
+                .typesetPromise([message])
+                .catch(function (error) {
 
-}
-
-        messages.scrollTop =
-            messages.scrollHeight;
-
-
-        return message;
-
-    }
-
-    function addThinking() {
-
-        const message =
-            document.createElement("div");
-
-
-        message.className =
-            "message ai thinking";
-
-
-        message.innerHTML = `
-            <span></span>
-            <span></span>
-            <span></span>
-        `;
-
-
-        messages.appendChild(
-            message
-        );
-
-
-        messages.scrollTop =
-            messages.scrollHeight;
-
-
-        return message;
-
-    }
-
-    form.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            const text =
-                input.value.trim();
-
-
-            if (!text) {
-                return;
-            }
-
-
-            addMessage(
-                text,
-                "user"
-            );
-
-
-            conversation.push({
-
-                role: "user",
-
-                content: text
-
-            });
-
-
-            input.value = "";
-
-            input.disabled = true;
-
-            sendButton.disabled = true;
-
-
-            const thinking =
-                addThinking();
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        WORKER_URL,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify({
-
-                                    topic:
-                                        topic,
-
-                                    messages:
-                                        conversation.slice(-12)
-
-                                })
-                        }
+                    console.error(
+                        "MathJax error:",
+                        error
                     );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.error ||
-                        "PHYSICA request failed."
-                    );
-
-                }
-
-
-                thinking.remove();
-
-
-                const answer =
-                    data.answer ||
-                    "No answer received.";
-
-
-                addMessage(
-                    answer,
-                    "ai"
-                );
-
-
-                conversation.push({
-
-                    role: "assistant",
-
-                    content: answer
 
                 });
 
+        }
 
-            } catch (error) {
+        requestAnimationFrame(
+            function () {
 
-                console.error(
-                    "PHYSICA error:",
-                    error
-                );
+                messages.scrollTo({
 
+                    top:
+                        messages.scrollHeight,
 
-                thinking.remove();
+                    behavior:
+                        "smooth"
 
-
-                addMessage(
-                    "I couldn't connect to PHYSICA right now. Please try again.",
-                    "ai"
-                );
+                });
 
             }
+        );
 
 
-            input.disabled = false;
+        return message;
 
-            sendButton.disabled = false;
+    }
 
-            input.focus();
+    if (
+        form &&
+        input &&
+        sendButton &&
+        messages
+    ) {
 
-        }
-    );
+
+        form.addEventListener(
+            "submit",
+            async function (event) {
 
 
-    input.focus();
+                event.preventDefault();
+
+
+                const userMessage =
+                    input.value.trim();
+
+
+                if (!userMessage) {
+                    return;
+                }
+
+                addMessage(
+                    userMessage,
+                    "user"
+                );
+
+
+                input.value = "";
+
+
+                input.disabled = true;
+
+                sendButton.disabled = true;
+
+                const loading =
+                    addMessage(
+                        "PHYSICA is thinking...",
+                        "ai"
+                    );
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            WORKER_URL,
+                            {
+
+                                method:
+                                    "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        message:
+                                            userMessage,
+
+                                        topic:
+                                            topic
+
+                                    })
+
+                            }
+                        );
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.error ||
+                            "PHYSICA could not process your question."
+                        );
+
+                    }
+
+
+                    loading.remove();
+
+
+                    addMessage(
+                        data.answer ||
+                        "I didn't receive an answer.",
+                        "ai",
+                        true
+                    );
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        "PHYSICA error:",
+                        error
+                    );
+
+
+                    loading.remove();
+
+
+                    addMessage(
+                        "I couldn't connect to PHYSICA right now. Please try again.",
+                        "ai"
+                    );
+
+
+                } finally {
+
+
+                    input.disabled = false;
+
+                    sendButton.disabled = false;
+
+                    input.focus();
+
+                }
+
+            }
+        );
+
+    }
+
+    if (input) {
+
+        input.focus();
+
+    }
 
 });
