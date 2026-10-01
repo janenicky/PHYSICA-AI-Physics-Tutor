@@ -19,7 +19,9 @@
 
     <script>
         window.MathJax = {
+
             tex: {
+
                 inlineMath: [
                     ["\\(", "\\)"]
                 ],
@@ -28,11 +30,13 @@
                     ["\\[", "\\]"],
                     ["$$", "$$"]
                 ]
+
             },
 
             svg: {
                 fontCache: "global"
             }
+
         };
     </script>
 
@@ -43,202 +47,189 @@
 
 </head>
 
+
 <body class="tutor-page">
 
+    <header class="navbar">
 
-<header class="navbar">
-
-    <a
-        href="index.html"
-        class="logo"
-    >
-        PHYSICA
-    </a>
-
-
-    <nav>
-
-        <a href="index.html#topics">
-            Topics
+        <a
+            href="index.html"
+            class="logo"
+        >
+            PHYSICA
         </a>
 
-        <a href="tutor.html">
-            AI Tutor
+
+        <nav>
+
+            <a href="index.html#topics">
+                Topics
+            </a>
+
+            <a href="tutor.html">
+                AI Tutor
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <a
+            href="index.html"
+            class="nav-button"
+        >
+            ← Back
         </a>
 
-        <a href="index.html#about">
-            About
-        </a>
+    </header>
 
-    </nav>
+    <main>
 
+        <section class="real-tutor">
 
-    <a
-        href="index.html"
-        class="nav-button"
-    >
-        ← Back
-    </a>
+            <div class="real-tutor-intro">
 
-</header>
+                <p class="eyebrow">
+                    YOUR AI PHYSICS TUTOR
+                </p>
 
 
-
-<main class="tutor-main">
-
-
-    <section class="real-tutor">
-
-
-        <div class="real-tutor-intro">
-
-            <p class="eyebrow">
-                YOUR AI PHYSICS TUTOR
-            </p>
+                <h1>
+                    Think like a
+                    <span>physicist.</span>
+                </h1>
 
 
-            <h1>
-                Think like a
-                <span>physicist.</span>
-            </h1>
+                <p class="tutor-description">
+                    Ask questions, explore concepts,
+                    and work through problems with PHYSICA.
+                </p>
 
 
-            <p>
+                <div class="topic-indicator">
 
-                Ask questions, explore concepts,
-                and work through problems with PHYSICA.
+                    <span class="topic-dot"></span>
 
-            </p>
-
-
-            <div class="topic-indicator">
-
-                <span class="topic-dot"></span>
-
-                <span id="current-topic">
-                    General Physics
-                </span>
-
-            </div>
-
-        </div>
-
-        <div class="real-chat">
-
-
-            <div class="real-chat-header">
-
-
-                <div class="ai-avatar">
-
-                    <div class="mini-core"></div>
-
-                    <div class="mini-orbit mini-one"></div>
-
-                    <div class="mini-orbit mini-two"></div>
-
-                </div>
-
-
-                <div class="ai-title">
-
-                    <strong>
-                        PHYSICA AI
-                    </strong>
-
-                    <small>
-                        Your physics tutor
-                    </small>
-
-                </div>
-
-
-                <div class="online-indicator">
-
-                    <span></span>
-
-                    ONLINE
+                    <span id="current-topic">
+                        General Physics
+                    </span>
 
                 </div>
 
             </div>
 
+            <div class="real-chat">
+
+                <div class="real-chat-header">
+
+                    <div class="ai-identity">
+
+                        <div class="ai-avatar">
+
+                            <div class="avatar-orbit orbit-a"></div>
+
+                            <div class="avatar-orbit orbit-b"></div>
+
+                            <div class="avatar-core"></div>
+
+                        </div>
 
 
-            <div
-                class="real-messages"
-                id="messages"
-            >
+                        <div class="ai-name">
 
-                <div class="message ai">
+                            <strong>
+                                PHYSICA AI
+                            </strong>
 
-                    Hi! I'm PHYSICA.
+                            <small>
+                                Your physics tutor
+                            </small>
 
-                    <br><br>
+                        </div>
 
-                    What would you like
-                    to understand today?
+                    </div>
+
+
+                    <div class="online-status">
+
+                        <span></span>
+
+                        ONLINE
+
+                    </div>
 
                 </div>
 
-            </div>
-
-
-
-            <form
-                class="real-chat-input"
-                id="chat-form"
-            >
-
-                <input
-                    id="chat-message"
-                    type="text"
-                    placeholder="Ask PHYSICA anything..."
-                    autocomplete="off"
-                    required
+                <div
+                    class="real-messages"
+                    id="messages"
                 >
 
+                    <div class="message ai">
 
-                <button
-                    id="chat-send"
-                    type="submit"
+                        <p>
+                            Hi! I'm PHYSICA.
+                        </p>
+
+                        <p>
+                            What would you like to understand today?
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <form
+                    class="real-chat-input"
+                    id="chat-form"
                 >
-                    →
-                </button>
 
-            </form>
-
-
-            <p class="chat-hint">
-
-                PHYSICA guides you toward
-                understanding, not just
-                the final answer.
-
-            </p>
-
-        </div>
-
-    </section>
-
-</main>
+                    <input
+                        type="text"
+                        id="chat-message"
+                        placeholder="Ask PHYSICA anything..."
+                        autocomplete="off"
+                        required
+                    >
 
 
+                    <button
+                        type="submit"
+                        id="chat-send"
+                        aria-label="Send message"
+                    >
+                        →
+                    </button>
 
-<footer>
-
-    <div>
-        PHYSICA
-    </div>
-
-    <p>
-        Learn. Question. Understand.
-    </p>
-
-</footer>
+                </form>
 
 
-<script src="tutor.js"></script>
+                <p class="chat-hint">
+                    PHYSICA guides you toward understanding,
+                    not just the final answer.
+                </p>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            PHYSICA — Learn. Question. Understand.
+        </p>
+
+    </footer>
+
+
+    <script src="tutor.js"></script>
 
 </body>
 
