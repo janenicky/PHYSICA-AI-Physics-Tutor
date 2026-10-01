@@ -14,23 +14,22 @@
 
     <header class="navbar">
 
-        <a href="#" class="logo">
+        <a href="index.html" class="logo">
             PHYSICA
         </a>
 
         <nav>
             <a href="#topics">Topics</a>
-            <a href="#tutor">AI Tutor</a>
+            <a href="tutor.html">AI Tutor</a>
             <a href="#about">About</a>
         </nav>
 
-        <button
+        <a
             class="nav-button"
-            id="try-tutor"
-            type="button"
+            href="tutor.html"
         >
             Try AI Tutor
-        </button>
+        </a>
 
     </header>
 
@@ -58,16 +57,15 @@
 
                 <div class="hero-buttons">
 
-                    <button
+                    <a
+                        href="#topics"
                         class="primary-button"
-                        id="start-learning"
-                        type="button"
                     >
                         Start learning
-                    </button>
+                    </a>
 
                     <a
-                        href="#tutor"
+                        href="tutor.html"
                         class="secondary-button"
                     >
                         Meet your AI Tutor →
@@ -118,10 +116,10 @@
 
             <div class="topic-grid">
 
-                <article
+
+                <a
                     class="topic-card"
-                    data-topic="Mechanics"
-                    tabindex="0"
+                    href="tutor.html?topic=Mechanics"
                 >
 
                     <span>01</span>
@@ -134,13 +132,12 @@
                         Motion, forces, energy and momentum.
                     </p>
 
-                </article>
+                </a>
 
 
-                <article
+                <a
                     class="topic-card"
-                    data-topic="Electricity"
-                    tabindex="0"
+                    href="tutor.html?topic=Electricity"
                 >
 
                     <span>02</span>
@@ -153,13 +150,12 @@
                         Fields, circuits and electromagnetic phenomena.
                     </p>
 
-                </article>
+                </a>
 
 
-                <article
+                <a
                     class="topic-card"
-                    data-topic="Waves"
-                    tabindex="0"
+                    href="tutor.html?topic=Waves"
                 >
 
                     <span>03</span>
@@ -172,13 +168,12 @@
                         Oscillations, sound, light and interference.
                     </p>
 
-                </article>
+                </a>
 
 
-                <article
+                <a
                     class="topic-card"
-                    data-topic="Thermodynamics"
-                    tabindex="0"
+                    href="tutor.html?topic=Thermodynamics"
                 >
 
                     <span>04</span>
@@ -191,36 +186,17 @@
                         Heat, temperature and the laws of energy.
                     </p>
 
-                </article>
+                </a>
+
 
             </div>
 
 
-            <p id="selected-topic">
-                Select a topic to begin.
-            </p>
+            <div class="topic-note">
 
-
-            <div
-                class="topic-info"
-                id="topic-info"
-            >
-
-                <h3 id="topic-title">
-                    Explore a topic
-                </h3>
-
-                <p id="topic-description">
-                    Choose one of the topics above to begin
-                    your journey through physics.
+                <p>
+                    Select a topic to begin exploring with PHYSICA.
                 </p>
-
-                <button
-                    id="topic-start"
-                    type="button"
-                >
-                    Explore with PHYSICA →
-                </button>
 
             </div>
 
@@ -248,6 +224,13 @@
                     Your AI tutor will guide you step by step.
                 </p>
 
+                <a
+                    href="tutor.html"
+                    class="primary-button tutor-button"
+                >
+                    Open PHYSICA AI →
+                </a>
+
             </div>
 
             <div class="chat-preview">
@@ -257,17 +240,21 @@
                     <div class="status"></div>
 
                     <div>
-                        <strong>PHYSICA AI</strong>
-                        <small>Physics tutor</small>
+
+                        <strong>
+                            PHYSICA AI
+                        </strong>
+
+                        <small>
+                            Physics tutor
+                        </small>
+
                     </div>
 
                 </div>
 
 
-                <div
-                    class="messages"
-                    id="messages"
-                >
+                <div class="messages">
 
                     <div class="message ai">
                         Hi! What are you working on today?
@@ -286,30 +273,17 @@
                 </div>
 
 
-                <form
-                    class="chat-input"
-                    id="chat-form"
-                >
+                <div class="chat-preview-input">
 
-                    <input
-                        type="text"
-                        id="chat-message"
-                        name="message"
-                        placeholder="Ask PHYSICA anything..."
-                        autocomplete="off"
-                        aria-label="Ask PHYSICA a question"
-                        required
-                    >
+                    <span>
+                        Ask PHYSICA anything...
+                    </span>
 
-                    <button
-                        id="chat-demo-button"
-                        type="submit"
-                        aria-label="Send message"
-                    >
+                    <span class="preview-arrow">
                         →
-                    </button>
+                    </span>
 
-                </form>
+                </div>
 
             </div>
 
