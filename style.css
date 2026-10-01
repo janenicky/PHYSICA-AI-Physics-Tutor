@@ -688,3 +688,19 @@ body::after {
         transform: scale(1);
     }
 }
+
+.topic-card.selected {
+    border-color: #7c8cff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(124, 140, 255, 0.14),
+            rgba(255, 255, 255, 0.03)
+        );
+
+    box-shadow:
+        0 0 30px rgba(124, 140, 255, 0.12);
+
+    transform: translateY(-8px);
+}
