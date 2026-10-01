@@ -1,46 +1,108 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const topics = document.getElementById("topics");
-  const startButton = document.querySelector('a[href="#topics"]');
-  const physicsCard = document.getElementById("physics-card");
-  const navbar = document.querySelector(".navbar");
 
-  if (startButton && topics) {
-    startButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      topics.scrollIntoView({ behavior: "smooth", block: "start" });
+    /* =====================================================
+       SMOOTH SCROLL
+    ===================================================== */
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+        link.addEventListener("click", event => {
+
+            const targetId =
+                link.getAttribute("href");
+
+            if (!targetId || targetId === "#") {
+                return;
+            }
+
+            const target =
+                document.querySelector(targetId);
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        });
+
     });
-  }
 
-  if (physicsCard) {
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
 
-    document.addEventListener("mousemove", (event) => {
-      targetX = (event.clientX / window.innerWidth - 0.5) * 7;
-      targetY = (event.clientY / window.innerHeight - 0.5) * -7;
-    });
+    /* =====================================================
+       HERO PHYSICS PARALLAX
+    ===================================================== */
 
-    const animate = () => {
-      currentX += (targetX - currentX) * 0.05;
-      currentY += (targetY - currentY) * 0.05;
+    const physicsCard =
+        document.getElementById("physics-card");
 
-      physicsCard.style.setProperty("--mouse-x", `${currentX}deg`);
-      physicsCard.style.setProperty("--mouse-y", `${currentY}deg`);
 
-      requestAnimationFrame(animate);
-    };
+    if (physicsCard) {
 
-    animate();
-  }
+        document.addEventListener(
+            "mousemove",
+            event => {
 
-  if (navbar) {
-    const updateNavbar = () => {
-      navbar.classList.toggle("scrolled", window.scrollY > 20);
-    };
+                const x =
+                    (event.clientX / window.innerWidth - 0.5)
+                    * 5;
 
-    updateNavbar();
-    window.addEventListener("scroll", updateNavbar, { passive: true });
-  }
+                const y =
+                    (event.clientY / window.innerHeight - 0.5)
+                    * -5;
+
+
+                physicsCard.style.setProperty(
+                    "--mouse-x",
+                    `${x}deg`
+                );
+
+                physicsCard.style.setProperty(
+                    "--mouse-y",
+                    `${y}deg`
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    const navbar =
+        document.querySelector(".navbar");
+
+
+    if (navbar) {
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (window.scrollY > 20) {
+
+                    navbar.style.background =
+                        "rgba(7,9,15,.88)";
+
+                } else {
+
+                    navbar.style.background =
+                        "rgba(7,9,15,.72)";
+
+                }
+
+            },
+            { passive: true }
+        );
+
+    }
+
 });
