@@ -141,15 +141,76 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    const chatDemoButton =
-        document.getElementById("chat-demo-button");
+const chatDemoButton =
+    document.getElementById("chat-demo-button");
 
-    chatDemoButton.addEventListener("click", function () {
+chatDemoButton.addEventListener("click", async function () {
 
-        alert(
-            "PHYSICA AI is coming next! 🚀"
+    const message = prompt(
+        "Ask PHYSICA a physics question:"
+    );
+
+    if (!message || message.trim() === "") {
+        return;
+    }
+
+    const selectedCard =
+        document.querySelector(".topic-card.selected");
+
+    const topic =
+        selectedCard
+            ? selectedCard.dataset.topic
+            : "General Physics";
+
+    chatDemoButton.textContent = "Thinking...";
+
+    try {
+
+        const response = await fetch(
+            "https://soft-frost-e73a.nikjena09-09.workers.dev/",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: message,
+                    topic: topic
+                })
+            }
         );
 
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Something went wrong."
+            );
+        }
+
+        alert(
+            "PHYSICA AI:\n\n" +
+            data.answer
+        );
+
+    } catch (error) {
+
+        console.error("PHYSICA error:", error);
+
+        alert(
+            "PHYSICA could not connect to the AI tutor.\n\n" +
+            error.message
+        );
+
+    } finally {
+
+        chatDemoButton.textContent = "Try AI Tutor";
+
+    }
+
+});
     });
 
 });
