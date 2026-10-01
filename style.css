@@ -1895,3 +1895,22 @@ footer div {
     }
 
 }
+
+.message.ai mjx-container {
+    color: #dfe3ff;
+
+    margin:
+        14px 0 !important;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    max-width: 100%;
+}
+
+
+.message.ai mjx-container[display="true"] {
+    padding:
+        10px 0;
+}
