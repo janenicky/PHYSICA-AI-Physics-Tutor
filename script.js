@@ -1,77 +1,97 @@
-const startLearning = document.getElementById("start-learning");
-const topicsSection = document.getElementById("topics");
+document.addEventListener("DOMContentLoaded", function () {
 
-startLearning.addEventListener("click", function () {
-    topicsSection.scrollIntoView({
-        behavior: "smooth"
+    const startLearning =
+        document.getElementById("start-learning");
+
+    const topicsSection =
+        document.getElementById("topics");
+
+    const tryTutor =
+        document.getElementById("try-tutor");
+
+    const tutorSection =
+        document.getElementById("tutor");
+
+    startLearning.addEventListener("click", function () {
+
+        topicsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
     });
-});
 
+    tryTutor.addEventListener("click", function () {
 
-const tryTutor = document.getElementById("try-tutor");
-const tutorSection = document.getElementById("tutor");
+        tutorSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
-tryTutor.addEventListener("click", function () {
-    tutorSection.scrollIntoView({
-        behavior: "smooth"
     });
-});
 
-const topics = {
+    const topics = {
 
-    Mechanics: {
-        title: "Mechanics",
-        description:
-            "Explore motion, forces, energy and momentum — and understand why objects move the way they do."
-    },
+        Mechanics: {
+            title: "Mechanics",
+            description:
+                "Explore motion, forces, energy and momentum — and understand why objects move the way they do."
+        },
 
-    Electricity: {
-        title: "Electricity",
-        description:
-            "Discover electric fields, circuits, voltage and current, and see how they connect."
-    },
+        Electricity: {
+            title: "Electricity",
+            description:
+                "Discover electric fields, circuits, voltage and current, and see how they connect."
+        },
 
-    Waves: {
-        title: "Waves",
-        description:
-            "Explore oscillations, sound, light and interference through the language of waves."
-    },
+        Waves: {
+            title: "Waves",
+            description:
+                "Explore oscillations, sound, light and interference through the language of waves."
+        },
 
-    Thermodynamics: {
-        title: "Thermodynamics",
-        description:
-            "Understand heat, temperature, energy transfer and the laws that govern physical systems."
-    }
+        Thermodynamics: {
+            title: "Thermodynamics",
+            description:
+                "Understand heat, temperature, energy transfer and the laws that govern physical systems."
+        }
 
-};
-
-const topicCards = document.querySelectorAll(".topic-card");
-
-const selectedTopic =
-    document.getElementById("selected-topic");
-
-const topicTitle =
-    document.getElementById("topic-title");
-
-const topicDescription =
-    document.getElementById("topic-description");
-
-const topicStart =
-    document.getElementById("topic-start");
+    };
 
 
-topicCards.forEach(function (card) {
+    const topicCards =
+        document.querySelectorAll(".topic-card");
 
-    card.addEventListener("click", function () {
+    const selectedTopic =
+        document.getElementById("selected-topic");
+
+    const topicInfo =
+        document.getElementById("topic-info");
+
+    const topicTitle =
+        document.getElementById("topic-title");
+
+    const topicDescription =
+        document.getElementById("topic-description");
+
+    const topicStart =
+        document.getElementById("topic-start");
+
+    function selectTopic(card) {
 
         topicCards.forEach(function (otherCard) {
+
             otherCard.classList.remove("selected");
+
         });
 
         card.classList.add("selected");
 
-        const topicName = card.dataset.topic;
-        const topic = topics[topicName];
+        const topicName =
+            card.dataset.topic;
+
+        const topic =
+            topics[topicName];
 
         selectedTopic.textContent =
             "Selected topic: " + topicName;
@@ -82,14 +102,54 @@ topicCards.forEach(function (card) {
         topicDescription.textContent =
             topic.description;
 
+        topicInfo.classList.add("visible");
+
+    }
+    
+    topicCards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+            selectTopic(card);
+
+        });
+
+        card.addEventListener("keydown", function (event) {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                selectTopic(card);
+
+            }
+
+        });
+
     });
 
-});
 
-topicStart.addEventListener("click", function () {
+    topicStart.addEventListener("click", function () {
 
-    tutorSection.scrollIntoView({
-        behavior: "smooth"
+        tutorSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
+
+    const chatDemoButton =
+        document.getElementById("chat-demo-button");
+
+    chatDemoButton.addEventListener("click", function () {
+
+        alert(
+            "PHYSICA AI is coming next! 🚀"
+        );
+
     });
 
 });
