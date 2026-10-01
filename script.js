@@ -103,3 +103,42 @@ document.addEventListener("DOMContentLoaded", function () {
     animate();
 
 });
+
+const navbar =
+    document.querySelector(".navbar");
+
+
+if (navbar) {
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            if (window.scrollY > 20) {
+
+                navbar.style.background =
+                    "rgba(7, 9, 15, .82)";
+
+                navbar.style.borderBottomColor =
+                    "rgba(255,255,255,.10)";
+
+                navbar.style.boxShadow =
+                    "0 10px 35px rgba(0,0,0,.12)";
+
+            } else {
+
+                navbar.style.background =
+                    "rgba(7, 9, 15, .68)";
+
+                navbar.style.borderBottomColor =
+                    "rgba(255,255,255,.07)";
+
+                navbar.style.boxShadow =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
