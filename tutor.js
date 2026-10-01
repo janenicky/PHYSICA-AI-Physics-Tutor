@@ -44,67 +44,196 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const conversation = [];
 
-    function formatAIResponse(text) {
+  function formatAIResponse(text) {
 
-        let safe =
-            String(text)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
-
-
-        safe =
-            safe
-                .replace(
-                    /^### (.*)$/gm,
-                    "<h4>$1</h4>"
-                )
-
-                .replace(
-                    /^## (.*)$/gm,
-                    "<h3>$1</h3>"
-                )
-
-                .replace(
-                    /^# (.*)$/gm,
-                    "<h2>$1</h2>"
-                )
-
-                .replace(
-                    /\*\*(.*?)\*\*/g,
-                    "<strong>$1</strong>"
-                )
-
-                .replace(
-                    /`([^`]+)`/g,
-                    "<code>$1</code>"
-                )
-
-                .replace(
-                    /^\- (.*)$/gm,
-                    "<li>$1</li>"
-                )
-
-                .replace(
-                    /^\* (.*)$/gm,
-                    "<li>$1</li>"
-                )
-
-                .replace(
-                    /\n\n/g,
-                    '<div class="response-space"></div>'
-                )
-
-                .replace(
-                    /\n/g,
-                    "<br>"
-                );
+    let safe = String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
 
 
-        return safe;
+
+    safe = safe
+        .replace(/\\\((.*?)\\\)/g, "$1")
+        .replace(/\\\[(.*?)\\\]/g, "$1")
+        .replace(/\\lambda/g, "λ")
+        .replace(/\\Delta/g, "Δ")
+        .replace(/\\alpha/g, "α")
+        .replace(/\\beta/g, "β")
+        .replace(/\\theta/g, "θ")
+        .replace(/\\mu/g, "μ")
+        .replace(/\\pi/g, "π");
+
+
+    safe = safe
+        .replace(
+            /\*\*(.*?)\*\*/g,
+            "<strong>$1</strong>"
+        )
+
+        .replace(
+            /\*([^*]+)\*/g,
+            "<em>$1</em>"
+        )
+
+        .replace(
+            /`([^`]+)`/g,
+            "<code>$1</code>"
+        );
+
+
+    const lines =
+        safe.split("\n");
+
+
+    let html = "";
+
+    let inList = false;
+    let listType = null;
+
+
+    function closeList() {
+
+        if (!inList) {
+            return;
+        }
+
+        html +=
+            listType === "ol"
+                ? "</ol>"
+                : "</ul>";
+
+        inList = false;
+        listType = null;
 
     }
 
+
+    for (let line of lines) {
+
+        const trimmed =
+            line.trim();
+
+
+
+        if (!trimmed) {
+
+            closeList();
+
+            html +=
+                '<div class="response-space"></div>';
+
+            continue;
+
+        }
+
+
+        if (trimmed.startsWith("## ")) {
+
+            closeList();
+
+            html +=
+                `<h3>${trimmed.slice(3)}</h3>`;
+
+            continue;
+
+        }
+
+
+        if (trimmed.startsWith("### ")) {
+
+            closeList();
+
+            html +=
+                `<h4>${trimmed.slice(4)}</h4>`;
+
+            continue;
+
+        }
+
+
+        if (trimmed.startsWith("# ")) {
+
+            closeList();
+
+            html +=
+                `<h2>${trimmed.slice(2)}</h2>`;
+
+            continue;
+
+        }
+
+
+        const numbered =
+            trimmed.match(
+                /^\d+\.\s+(.*)$/
+            );
+
+
+        if (numbered) {
+
+            if (!inList || listType !== "ol") {
+
+                closeList();
+
+                html += "<ol>";
+
+                inList = true;
+
+                listType = "ol";
+
+            }
+
+            html +=
+                `<li>${numbered[1]}</li>`;
+
+            continue;
+
+        }
+
+
+        const bullet =
+            trimmed.match(
+                /^[-*•]\s+(.*)$/
+            );
+
+
+        if (bullet) {
+
+            if (!inList || listType !== "ul") {
+
+                closeList();
+
+                html += "<ul>";
+
+                inList = true;
+
+                listType = "ul";
+
+            }
+
+            html +=
+                `<li>${bullet[1]}</li>`;
+
+            continue;
+
+        }
+
+
+        closeList();
+
+        html +=
+            `<p>${trimmed}</p>`;
+
+    }
+
+
+    closeList();
+
+
+    return html;
+
+}
     function addMessage(
         text,
         type
