@@ -1,216 +1,594 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("chat-form");
-  const input = document.getElementById("chat-message");
-  const sendButton = document.getElementById("chat-send");
-  const messages = document.getElementById("messages");
-  const currentTopic = document.getElementById("current-topic");
 
-  const WORKER_URL = "https://soft-frost-e73a.nikjena09-09.workers.dev/";
+    const form =
+        document.getElementById("chat-form");
 
-  const params = new URLSearchParams(window.location.search);
-  const topic = params.get("topic") || "General Physics";
+    const input =
+        document.getElementById("chat-message");
 
-  if (currentTopic) {
-    currentTopic.textContent = topic;
-  }
+    const sendButton =
+        document.getElementById("chat-send");
 
-  function escapeHTML(value) {
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-  }
+    const messages =
+        document.getElementById("messages");
 
-  function formatAIResponse(text) {
-    let source = String(text);
-    const math = [];
+    const currentTopic =
+        document.getElementById("current-topic");
 
-    const saveMath = (match) => {
-      const index = math.length;
-      math.push(match);
-      return `@@MATH${index}@@`;
-    };
 
-    source = source.replace(/\\\[[\s\S]*?\\\]/g, saveMath);
-    source = source.replace(/\$\$[\s\S]*?\$\$/g, saveMath);
-    source = source.replace(/\\\([\s\S]*?\\\)/g, saveMath);
+    /* =====================================================
+       WORKER
+    ===================================================== */
 
-    source = escapeHTML(source);
+    const WORKER_URL =
+        "https://soft-frost-e73a.nikjena09-09.workers.dev/";
 
-    source = source
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/`([^`]+)`/g, "<code>$1</code>")
-      .replace(/\*([^*]+)\*/g, "<em>$1</em>");
 
-    const lines = source.split("\n");
-    let html = "";
-    let listType = null;
+    /* =====================================================
+       TOPIC
+    ===================================================== */
 
-    const closeList = () => {
-      if (listType) {
-        html += listType === "ol" ? "</ol>" : "</ul>";
-        listType = null;
-      }
-    };
-
-    for (const rawLine of lines) {
-      const line = rawLine.trim();
-
-      if (!line) {
-        closeList();
-        html += '<div class="response-space"></div>';
-        continue;
-      }
-
-      const mathMatch = line.match(/^@@MATH(\d+)@@$/);
-
-      if (mathMatch) {
-        closeList();
-        html += `<div class="math-block">${math[Number(mathMatch[1])]}</div>`;
-        continue;
-      }
-
-      if (line.startsWith("### ")) {
-        closeList();
-        html += `<h4>${line.slice(4)}</h4>`;
-        continue;
-      }
-
-      if (line.startsWith("## ")) {
-        closeList();
-        html += `<h3>${line.slice(3)}</h3>`;
-        continue;
-      }
-
-      if (line.startsWith("# ")) {
-        closeList();
-        html += `<h2>${line.slice(2)}</h2>`;
-        continue;
-      }
-
-      const numbered = line.match(/^\d+\.\s+(.*)$/);
-
-      if (numbered) {
-        if (listType !== "ol") {
-          closeList();
-          html += "<ol>";
-          listType = "ol";
-        }
-        html += `<li>${numbered[1]}</li>`;
-        continue;
-      }
-
-      const bullet = line.match(/^[-*•]\s+(.*)$/);
-
-      if (bullet) {
-        if (listType !== "ul") {
-          closeList();
-          html += "<ul>";
-          listType = "ul";
-        }
-        html += `<li>${bullet[1]}</li>`;
-        continue;
-      }
-
-      closeList();
-      html += `<p>${line}</p>`;
-    }
-
-    closeList();
-    return html;
-  }
-
-  function addMessage(text, type, formatted = false) {
-    const message = document.createElement("div");
-    message.classList.add("message", type);
-
-    if (type === "ai" && formatted) {
-      message.innerHTML = formatAIResponse(text);
-    } else {
-      const paragraph = document.createElement("p");
-      paragraph.textContent = text;
-      message.appendChild(paragraph);
-    }
-
-    messages.appendChild(message);
-
-    if (type === "ai" && window.MathJax?.typesetPromise) {
-      window.MathJax.typesetPromise([message]).catch(console.error);
-    }
-
-    requestAnimationFrame(() => {
-      messages.scrollTo({
-        top: messages.scrollHeight,
-        behavior: "smooth"
-      });
-    });
-
-    return message;
-  }
-
-  if (!form || !input || !sendButton || !messages) return;
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const userMessage = input.value.trim();
-    if (!userMessage) return;
-
-    addMessage(userMessage, "user");
-
-    input.value = "";
-    input.disabled = true;
-    sendButton.disabled = true;
-
-    const loading = addMessage("PHYSICA is thinking...", "ai");
-
-    try {
-      const response = await fetch(WORKER_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          message: userMessage,
-          topic
-        })
-      });
-
-      const raw = await response.text();
-
-      let data;
-      try {
-        data = JSON.parse(raw);
-      } catch {
-        throw new Error(`Worker returned invalid response (${response.status}).`);
-      }
-
-      if (!response.ok) {
-        throw new Error(
-          data.error || `Worker error (${response.status}).`
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
-      }
 
-      loading.remove();
 
-      addMessage(
-        data.answer || "No answer received.",
-        "ai",
-        true
-      );
-    } catch (error) {
-      console.error("PHYSICA error:", error);
+    const topic =
+        params.get("topic") ||
+        "General Physics";
 
-      loading.remove();
 
-      addMessage(
-        `Connection error: ${error.message || "Unknown error."}`,
-        "ai"
-      );
-    } finally {
-      input.disabled = false;
-      sendButton.disabled = false;
-      input.focus();
+    if (currentTopic) {
+
+        currentTopic.textContent =
+            topic;
+
     }
-  });
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(text) {
+
+        return String(text)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================================
+       FORMAT AI RESPONSE
+    ===================================================== */
+
+    function formatAIResponse(text) {
+
+        let source =
+            String(text);
+
+
+        const mathBlocks = [];
+
+
+        function saveMath(match) {
+
+            const index =
+                mathBlocks.length;
+
+            mathBlocks.push(match);
+
+            return `@@MATHBLOCK${index}@@`;
+
+        }
+
+
+        /* save display math */
+
+        source = source.replace(
+            /\\\[[\s\S]*?\\\]/g,
+            saveMath
+        );
+
+
+        source = source.replace(
+            /\$\$[\s\S]*?\$\$/g,
+            saveMath
+        );
+
+
+        /* escape HTML */
+
+        source = escapeHTML(source);
+
+
+        /* markdown */
+
+        source = source
+
+            .replace(
+                /\*\*(.*?)\*\*/g,
+                "<strong>$1</strong>"
+            )
+
+            .replace(
+                /`([^`]+)`/g,
+                "<code>$1</code>"
+            )
+
+            .replace(
+                /\*([^*]+)\*/g,
+                "<em>$1</em>"
+            );
+
+
+        const lines =
+            source.split("\n");
+
+
+        let html = "";
+
+        let inList = false;
+
+        let listType = null;
+
+
+        function closeList() {
+
+            if (!inList) {
+                return;
+            }
+
+
+            html +=
+                listType === "ol"
+                    ? "</ol>"
+                    : "</ul>";
+
+
+            inList = false;
+
+            listType = null;
+
+        }
+
+
+        for (const line of lines) {
+
+            const trimmed =
+                line.trim();
+
+
+            /* empty line */
+
+            if (!trimmed) {
+
+                closeList();
+
+                html +=
+                    '<div class="response-space"></div>';
+
+                continue;
+
+            }
+
+
+            /* math */
+
+            if (
+                /^@@MATHBLOCK\d+@@$/
+                    .test(trimmed)
+            ) {
+
+                closeList();
+
+
+                const match =
+                    trimmed.match(/\d+/);
+
+
+                const index =
+                    Number(match[0]);
+
+
+                html +=
+                    `<div class="math-block">
+                        ${mathBlocks[index]}
+                    </div>`;
+
+
+                continue;
+
+            }
+
+
+            /* headings */
+
+            if (
+                trimmed.startsWith("### ")
+            ) {
+
+                closeList();
+
+                html +=
+                    `<h4>${trimmed.slice(4)}</h4>`;
+
+                continue;
+
+            }
+
+
+            if (
+                trimmed.startsWith("## ")
+            ) {
+
+                closeList();
+
+                html +=
+                    `<h3>${trimmed.slice(3)}</h3>`;
+
+                continue;
+
+            }
+
+
+            if (
+                trimmed.startsWith("# ")
+            ) {
+
+                closeList();
+
+                html +=
+                    `<h2>${trimmed.slice(2)}</h2>`;
+
+                continue;
+
+            }
+
+
+            /* numbered list */
+
+            const numbered =
+                trimmed.match(
+                    /^\d+\.\s+(.*)$/
+                );
+
+
+            if (numbered) {
+
+                if (
+                    !inList ||
+                    listType !== "ol"
+                ) {
+
+                    closeList();
+
+                    html += "<ol>";
+
+                    inList = true;
+
+                    listType = "ol";
+
+                }
+
+
+                html +=
+                    `<li>${numbered[1]}</li>`;
+
+                continue;
+
+            }
+
+
+            /* bullet list */
+
+            const bullet =
+                trimmed.match(
+                    /^[-*•]\s+(.*)$/
+                );
+
+
+            if (bullet) {
+
+                if (
+                    !inList ||
+                    listType !== "ul"
+                ) {
+
+                    closeList();
+
+                    html += "<ul>";
+
+                    inList = true;
+
+                    listType = "ul";
+
+                }
+
+
+                html +=
+                    `<li>${bullet[1]}</li>`;
+
+                continue;
+
+            }
+
+
+            /* normal paragraph */
+
+            closeList();
+
+
+            html +=
+                `<p>${trimmed}</p>`;
+
+        }
+
+
+        closeList();
+
+
+        return html;
+
+    }
+
+
+    /* =====================================================
+       ADD MESSAGE
+    ===================================================== */
+
+    function addMessage(
+        text,
+        type,
+        formatted = false
+    ) {
+
+        const message =
+            document.createElement("div");
+
+
+        message.classList.add(
+            "message",
+            type
+        );
+
+
+        if (
+            type === "ai" &&
+            formatted
+        ) {
+
+            message.innerHTML =
+                formatAIResponse(text);
+
+        } else {
+
+            message.textContent =
+                text;
+
+        }
+
+
+        messages.appendChild(message);
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        if (
+            type === "ai" &&
+            formatted &&
+            window.MathJax
+        ) {
+
+            MathJax.typesetPromise([
+                message
+            ]).catch(error => {
+
+                console.error(
+                    "MathJax error:",
+                    error
+                );
+
+            });
+
+        }
+
+
+        return message;
+
+    }
+
+
+    /* =====================================================
+       LOADING MESSAGE
+    ===================================================== */
+
+    function addLoading() {
+
+        const loading =
+            document.createElement("div");
+
+
+        loading.className =
+            "message ai";
+
+
+        loading.innerHTML =
+            "<p>Thinking...</p>";
+
+
+        messages.appendChild(
+            loading
+        );
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        return loading;
+
+    }
+
+
+    /* =====================================================
+       CHAT SUBMIT
+    ===================================================== */
+
+    form.addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            const userMessage =
+                input.value.trim();
+
+
+            if (!userMessage) {
+                return;
+            }
+
+
+            /* user message */
+
+            addMessage(
+                userMessage,
+                "user"
+            );
+
+
+            input.value = "";
+
+            input.disabled = true;
+
+            sendButton.disabled = true;
+
+
+            const loading =
+                addLoading();
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        WORKER_URL,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    message:
+                                        userMessage,
+
+                                    topic:
+                                        topic
+                                })
+                        }
+                    );
+
+
+                const raw =
+                    await response.text();
+
+
+                let data;
+
+
+                try {
+
+                    data =
+                        JSON.parse(raw);
+
+                } catch {
+
+                    throw new Error(
+                        `Worker returned invalid response (${response.status}).`
+                    );
+
+                }
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        `Worker error (${response.status}).`
+                    );
+
+                }
+
+
+                if (
+                    !data.answer
+                ) {
+
+                    throw new Error(
+                        "The AI returned an empty answer."
+                    );
+
+                }
+
+
+                loading.remove();
+
+
+                addMessage(
+                    data.answer,
+                    "ai",
+                    true
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "PHYSICA error:",
+                    error
+                );
+
+
+                loading.remove();
+
+
+                addMessage(
+                    `Connection error: ${error.message || "Unknown error."}`,
+                    "ai"
+                );
+
+            }
+
+
+            input.disabled = false;
+
+            sendButton.disabled = false;
+
+            input.focus();
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIAL FOCUS
+    ===================================================== */
+
+    if (input) {
+        input.focus();
+    }
+
 });
