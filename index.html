@@ -14,7 +14,9 @@
 
     <header class="navbar">
 
-        <a href="#" class="logo">PHYSICA</a>
+        <a href="#" class="logo">
+            PHYSICA
+        </a>
 
         <nav>
             <a href="#topics">Topics</a>
@@ -75,11 +77,13 @@
 
             </div>
 
+
             <div class="hero-visual">
 
                 <div class="physics-card">
 
                     <div class="orbit orbit-one"></div>
+
                     <div class="orbit orbit-two"></div>
 
                     <div class="planet"></div>
@@ -110,6 +114,7 @@
             <h2>
                 Choose a universe to explore.
             </h2>
+
 
             <div class="topic-grid">
 
@@ -190,6 +195,7 @@
 
             </div>
 
+
             <p id="selected-topic">
                 Select a topic to begin.
             </p>
@@ -258,7 +264,10 @@
                 </div>
 
 
-                <div class="messages">
+                <div
+                    class="messages"
+                    id="messages"
+                >
 
                     <div class="message ai">
                         Hi! What are you working on today?
@@ -277,32 +286,36 @@
                 </div>
 
 
-                <form class="chat-input" id="chat-form">
+                <form
+                    class="chat-input"
+                    id="chat-form"
+                >
 
-    <input
-        type="text"
-        id="chat-message"
-        placeholder="Ask PHYSICA anything..."
-        autocomplete="off"
-        required
-    >
+                    <input
+                        type="text"
+                        id="chat-message"
+                        name="message"
+                        placeholder="Ask PHYSICA anything..."
+                        autocomplete="off"
+                        aria-label="Ask PHYSICA a question"
+                        required
+                    >
 
-    <button
-        id="chat-demo-button"
-        type="submit"
-        aria-label="Send message"
-    >
-        →
-    </button>
+                    <button
+                        id="chat-demo-button"
+                        type="submit"
+                        aria-label="Send message"
+                    >
+                        →
+                    </button>
 
-</form>
+                </form>
 
             </div>
 
         </section>
 
     </main>
-
 
     <footer id="about">
 
