@@ -277,20 +277,25 @@
                 </div>
 
 
-                <div class="chat-input">
+                <form class="chat-input" id="chat-form">
 
-                    <span>
-                        Ask PHYSICA anything...
-                    </span>
+    <input
+        type="text"
+        id="chat-message"
+        placeholder="Ask PHYSICA anything..."
+        autocomplete="off"
+        required
+    >
 
-                    <button
-                        id="chat-demo-button"
-                        type="button"
-                    >
-                        →
-                    </button>
+    <button
+        id="chat-demo-button"
+        type="submit"
+        aria-label="Send message"
+    >
+        →
+    </button>
 
-                </div>
+</form>
 
             </div>
 
