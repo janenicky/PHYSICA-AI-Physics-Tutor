@@ -51,20 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-
-
-    safe = safe
-        .replace(/\\\((.*?)\\\)/g, "$1")
-        .replace(/\\\[(.*?)\\\]/g, "$1")
-        .replace(/\\lambda/g, "λ")
-        .replace(/\\Delta/g, "Δ")
-        .replace(/\\alpha/g, "α")
-        .replace(/\\beta/g, "β")
-        .replace(/\\theta/g, "θ")
-        .replace(/\\mu/g, "μ")
-        .replace(/\\pi/g, "π");
-
-
     safe = safe
         .replace(
             /\*\*(.*?)\*\*/g,
@@ -264,6 +250,22 @@ document.addEventListener("DOMContentLoaded", function () {
             message
         );
 
+        if (
+    type === "ai" &&
+    window.MathJax &&
+    window.MathJax.typesetPromise
+) {
+
+    window.MathJax
+        .typesetPromise([message])
+        .catch(error => {
+            console.error(
+                "MathJax error:",
+                error
+            );
+        });
+
+}
 
         messages.scrollTop =
             messages.scrollHeight;
