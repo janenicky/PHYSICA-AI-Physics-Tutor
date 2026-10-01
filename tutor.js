@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+
     const form =
         document.getElementById("chat-form");
 
@@ -19,17 +20,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentTopic =
         document.getElementById("current-topic");
 
+
     const WORKER_URL =
         "https://soft-frost-e73a.nikjena09-09.workers.dev/";
 
-    const urlParams =
+    const params =
         new URLSearchParams(
             window.location.search
         );
 
 
     const topic =
-        urlParams.get("topic") ||
+        params.get("topic") ||
         "General Physics";
 
 
@@ -44,15 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function formatAIResponse(text) {
 
-        let safeText =
+        let safe =
             String(text)
                 .replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;");
 
 
-        safeText =
-            safeText
+        safe =
+            safe
                 .replace(
                     /^### (.*)$/gm,
                     "<h4>$1</h4>"
@@ -70,11 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 .replace(
                     /\*\*(.*?)\*\*/g,
-                    "<strong>$1</strong>"
-                )
-
-                .replace(
-                    /__([^_]+)__/g,
                     "<strong>$1</strong>"
                 )
 
@@ -104,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-        return safeText;
+        return safe;
 
     }
 
@@ -117,10 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.createElement("div");
 
 
-        message.classList.add(
-            "message",
-            type
-        );
+        message.className =
+            `message ${type}`;
 
 
         if (type === "ai") {
@@ -149,17 +144,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    function addThinkingMessage() {
+    function addThinking() {
 
         const message =
             document.createElement("div");
 
 
-        message.classList.add(
-            "message",
-            "ai",
-            "thinking"
-        );
+        message.className =
+            "message ai thinking";
 
 
         message.innerHTML = `
@@ -182,18 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    if (
-        !form ||
-        !input ||
-        !sendButton ||
-        !messages
-    ) {
-
-        return;
-
-    }
-
-
     form.addEventListener(
         "submit",
         async function (event) {
@@ -201,16 +181,17 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
 
 
-            const userMessage =
+            const text =
                 input.value.trim();
 
 
-            if (!userMessage) {
+            if (!text) {
                 return;
             }
 
+
             addMessage(
-                userMessage,
+                text,
                 "user"
             );
 
@@ -219,20 +200,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 role: "user",
 
-                content: userMessage
+                content: text
 
             });
 
 
             input.value = "";
 
-
             input.disabled = true;
 
             sendButton.disabled = true;
 
+
             const thinking =
-                addThinkingMessage();
+                addThinking();
 
 
             try {
@@ -258,7 +239,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                         conversation.slice(-12)
 
                                 })
-
                         }
                     );
 
@@ -271,16 +251,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     throw new Error(
                         data.error ||
-                        "PHYSICA could not process your question."
+                        "PHYSICA request failed."
                     );
 
                 }
 
+
                 thinking.remove();
+
 
                 const answer =
                     data.answer ||
-                    "I didn't receive an answer.";
+                    "No answer received.";
 
 
                 addMessage(
@@ -300,7 +282,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } catch (error) {
 
-
                 console.error(
                     "PHYSICA error:",
                     error
@@ -315,17 +296,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     "ai"
                 );
 
-
-            } finally {
-
-
-                input.disabled = false;
-
-                sendButton.disabled = false;
-
-                input.focus();
-
             }
+
+
+            input.disabled = false;
+
+            sendButton.disabled = false;
+
+            input.focus();
 
         }
     );
