@@ -99,27 +99,41 @@ a {
     min-height: 90vh;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.05fr 0.95fr;
 
     align-items: center;
 
-    gap: 80px;
+    gap: 60px;
+
+    position: relative;
 }
 
 .hero h1 {
-    max-width: 700px;
+    max-width: 760px;
 
-    font-size: clamp(3rem, 6vw, 6rem);
+    font-size: clamp(3.2rem, 6vw, 6.5rem);
 
-    line-height: 0.98;
-    letter-spacing: -0.05em;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
 
-    margin-bottom: 30px;
+    margin-bottom: 32px;
+
+    font-weight: 700;
 }
 
 .hero h1 span {
     display: block;
-    color: #7c8cff;
+
+    background: linear-gradient(
+        90deg,
+        #7c8cff,
+        #aab4ff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
 }
 
 .hero-text {
@@ -177,7 +191,7 @@ a {
 }
 
 .physics-card {
-    width: min(420px, 80vw);
+    width: min(440px, 80vw);
     aspect-ratio: 1;
 
     position: relative;
@@ -188,16 +202,18 @@ a {
         radial-gradient(
             circle at center,
             rgba(124, 140, 255, 0.18),
-            transparent 55%
+            transparent 50%
         );
 
     border: 1px solid rgba(255, 255, 255, 0.08);
 
     box-shadow:
-        0 0 80px rgba(124, 140, 255, 0.12),
-        inset 0 0 80px rgba(124, 140, 255, 0.05);
+        0 0 100px rgba(124, 140, 255, 0.12),
+        inset 0 0 100px rgba(124, 140, 255, 0.05);
 
     animation: floating 6s ease-in-out infinite;
+
+    overflow: visible;
 }
 
 .orbit {
