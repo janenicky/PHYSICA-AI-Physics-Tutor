@@ -1,20 +1,12 @@
 const startLearning = document.getElementById("start-learning");
 const topicsSection = document.getElementById("topics");
-const selectedTopic = document.getElementById("selected-topic");
-const topicTitle = 
-    document.getElementById("topic-title");
-
-const topicDescription =
-    document.getElementById("topic-description");
-
-const topicStart =
-    document.getElementById("topic-start");
 
 startLearning.addEventListener("click", function () {
     topicsSection.scrollIntoView({
         behavior: "smooth"
     });
 });
+
 
 const tryTutor = document.getElementById("try-tutor");
 const tutorSection = document.getElementById("tutor");
@@ -23,32 +15,6 @@ tryTutor.addEventListener("click", function () {
     tutorSection.scrollIntoView({
         behavior: "smooth"
     });
-});
-
-const topicCards = document.querySelectorAll(".topic-card");
-
-topicCards.forEach(function (card) {
-
-    card.addEventListener("click", function () {
-
-        topicCards.forEach(function (otherCard) {
-            otherCard.classList.remove("selected");
-        });
-
-        card.classList.add("selected");
-
-        selectedTopic.textContent =
-    "Selected topic: " + card.dataset.topic;
-    });
-        const topic =
-    topics[card.dataset.topic];
-
-topicTitle.textContent =
-    topic.title;
-
-topicDescription.textContent =
-    topic.description;
-
 });
 
 const topics = {
@@ -78,3 +44,52 @@ const topics = {
     }
 
 };
+
+const topicCards = document.querySelectorAll(".topic-card");
+
+const selectedTopic =
+    document.getElementById("selected-topic");
+
+const topicTitle =
+    document.getElementById("topic-title");
+
+const topicDescription =
+    document.getElementById("topic-description");
+
+const topicStart =
+    document.getElementById("topic-start");
+
+
+topicCards.forEach(function (card) {
+
+    card.addEventListener("click", function () {
+
+        topicCards.forEach(function (otherCard) {
+            otherCard.classList.remove("selected");
+        });
+
+        card.classList.add("selected");
+
+        const topicName = card.dataset.topic;
+        const topic = topics[topicName];
+
+        selectedTopic.textContent =
+            "Selected topic: " + topicName;
+
+        topicTitle.textContent =
+            topic.title;
+
+        topicDescription.textContent =
+            topic.description;
+
+    });
+
+});
+
+topicStart.addEventListener("click", function () {
+
+    tutorSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
