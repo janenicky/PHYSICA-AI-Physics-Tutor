@@ -12,23 +12,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const tutorSection =
         document.getElementById("tutor");
 
-    startLearning.addEventListener("click", function () {
+    const topicCards =
+        document.querySelectorAll(".topic-card");
 
-        topicsSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+    const selectedTopic =
+        document.getElementById("selected-topic");
 
-    });
+    const topicInfo =
+        document.getElementById("topic-info");
 
-    tryTutor.addEventListener("click", function () {
+    const topicTitle =
+        document.getElementById("topic-title");
 
-        tutorSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+    const topicDescription =
+        document.getElementById("topic-description");
 
-    });
+    const topicStart =
+        document.getElementById("topic-start");
+
+    const chatForm =
+        document.getElementById("chat-form");
+
+    const chatMessage =
+        document.getElementById("chat-message");
+
+    const chatButton =
+        document.getElementById("chat-demo-button");
+
+    const messagesContainer =
+        document.getElementById("messages");
 
     const topics = {
 
@@ -58,258 +70,331 @@ document.addEventListener("DOMContentLoaded", function () {
 
     };
 
+    if (startLearning && topicsSection) {
 
-    const topicCards =
-        document.querySelectorAll(".topic-card");
+        startLearning.addEventListener(
+            "click",
+            function () {
 
-    const selectedTopic =
-        document.getElementById("selected-topic");
+                topicsSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
 
-    const topicInfo =
-        document.getElementById("topic-info");
+            }
+        );
 
-    const topicTitle =
-        document.getElementById("topic-title");
+    }
 
-    const topicDescription =
-        document.getElementById("topic-description");
 
-    const topicStart =
-        document.getElementById("topic-start");
+    if (tryTutor && tutorSection) {
+
+        tryTutor.addEventListener(
+            "click",
+            function () {
+
+                tutorSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+        );
+
+    }
 
     function selectTopic(card) {
 
-        topicCards.forEach(function (otherCard) {
+        if (!card) {
+            return;
+        }
 
-            otherCard.classList.remove("selected");
+        topicCards.forEach(
+            function (otherCard) {
 
-        });
+                otherCard.classList.remove(
+                    "selected"
+                );
+
+            }
+        );
+
 
         card.classList.add("selected");
+
 
         const topicName =
             card.dataset.topic;
 
+
         const topic =
             topics[topicName];
 
-        selectedTopic.textContent =
-            "Selected topic: " + topicName;
 
-        topicTitle.textContent =
-            topic.title;
-
-        topicDescription.textContent =
-            topic.description;
-
-        topicInfo.classList.add("visible");
-
-    }
-    
-    topicCards.forEach(function (card) {
-
-        card.addEventListener("click", function () {
-
-            selectTopic(card);
-
-        });
-
-        card.addEventListener("keydown", function (event) {
-
-            if (
-                event.key === "Enter" ||
-                event.key === " "
-            ) {
-
-                event.preventDefault();
-
-                selectTopic(card);
-
-            }
-
-        });
-
-    });
-
-
-    topicStart.addEventListener("click", function () {
-
-        tutorSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    });
-
-const chatForm =
-    document.getElementById("chat-form");
-
-const chatMessage =
-    document.getElementById("chat-message");
-
-const chatDemoButton =
-    document.getElementById("chat-demo-button");
-
-const messagesContainer =
-    document.querySelector(".messages");
-
-
-function addMessage(text, type) {
-
-    const messageElement =
-        document.createElement("div");
-
-    messageElement.classList.add(
-        "message",
-        type
-    );
-
-    messageElement.textContent = text;
-
-    messagesContainer.appendChild(
-        messageElement
-    );
-
-    messagesContainer.scrollTop =
-        messagesContainer.scrollHeight;
-
-}
-
-
-function addLoadingMessage() {
-
-    const loadingElement =
-        document.createElement("div");
-
-    loadingElement.classList.add(
-        "message",
-        "ai",
-        "loading-message"
-    );
-
-    loadingElement.textContent =
-        "PHYSICA is thinking...";
-
-    messagesContainer.appendChild(
-        loadingElement
-    );
-
-    messagesContainer.scrollTop =
-        messagesContainer.scrollHeight;
-
-    return loadingElement;
-
-}
-
-
-chatForm.addEventListener(
-    "submit",
-    async function (event) {
-
-        event.preventDefault();
-
-        const message =
-            chatMessage.value.trim();
-
-        if (!message) {
+        if (!topic) {
             return;
         }
 
-        const selectedCard =
-            document.querySelector(
-                ".topic-card.selected"
-            );
 
-        const topic =
-            selectedCard
-                ? selectedCard.dataset.topic
-                : "General Physics";
+        if (selectedTopic) {
+
+            selectedTopic.textContent =
+                "Selected topic: " + topicName;
+
+        }
 
 
-        addMessage(
-            message,
-            "user"
-        );
+        if (topicTitle) {
 
-        chatMessage.value = "";
+            topicTitle.textContent =
+                topic.title;
 
-        chatMessage.disabled = true;
-        chatDemoButton.disabled = true;
+        }
 
 
-        const loadingMessage =
-            addLoadingMessage();
+        if (topicDescription) {
+
+            topicDescription.textContent =
+                topic.description;
+
+        }
 
 
-        try {
+        if (topicInfo) {
 
-            const response =
-                await fetch(
-                    "https://soft-frost-e73a.nikjena09-09.workers.dev/",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body: JSON.stringify({
-                            message: message,
-                            topic: topic
-                        })
-                    }
-                );
-
-
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.error ||
-                    "Something went wrong."
-                );
-
-            }
-
-
-            loadingMessage.remove();
-
-
-            addMessage(
-                data.answer,
-                "ai"
-            );
-
-
-        } catch (error) {
-
-            console.error(
-                "PHYSICA error:",
-                error
-            );
-
-
-            loadingMessage.remove();
-
-
-            addMessage(
-                "I couldn't connect to PHYSICA right now. Please try again.",
-                "ai"
-            );
-
-
-        } finally {
-
-            chatMessage.disabled = false;
-            chatDemoButton.disabled = false;
-
-            chatMessage.focus();
+            topicInfo.classList.add("visible");
 
         }
 
     }
-);
+
+
+    topicCards.forEach(
+        function (card) {
+
+
+            card.addEventListener(
+                "click",
+                function () {
+
+                    selectTopic(card);
+
+                }
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        selectTopic(card);
+
+                    }
+
+                }
+            );
+
+
+        }
+    );
+
+    if (topicStart && tutorSection) {
+
+        topicStart.addEventListener(
+            "click",
+            function () {
+
+                tutorSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                if (chatMessage) {
+                    chatMessage.focus();
+                }
+
+            }
+        );
+
+    }
+
+    function addMessage(text, type) {
+
+        if (!messagesContainer) {
+            return null;
+        }
+
+
+        const messageElement =
+            document.createElement("div");
+
+
+        messageElement.classList.add(
+            "message",
+            type
+        );
+
+
+        messageElement.textContent =
+            text;
+
+
+        messagesContainer.appendChild(
+            messageElement
+        );
+
+
+        messagesContainer.scrollTop =
+            messagesContainer.scrollHeight;
+
+
+        return messageElement;
+
+    }
+
+
+    function addLoadingMessage() {
+
+        return addMessage(
+            "PHYSICA is thinking...",
+            "ai"
+        );
+
+    }
+
+    const WORKER_URL =
+        "https://soft-frost-e73a.nikjena09-09.workers.dev/";
+
+
+    if (chatForm && chatMessage && chatButton) {
+
+        chatForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                const message =
+                    chatMessage.value.trim();
+
+
+                if (!message) {
+                    return;
+                }
+
+                const selectedCard =
+                    document.querySelector(
+                        ".topic-card.selected"
+                    );
+
+
+                const topic =
+                    selectedCard
+                        ? selectedCard.dataset.topic
+                        : "General Physics";
+
+
+                addMessage(
+                    message,
+                    "user"
+                );
+
+                chatMessage.value = "";
+
+                chatMessage.disabled = true;
+                chatButton.disabled = true;
+
+                const loadingMessage =
+                    addLoadingMessage();
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            WORKER_URL,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    message: message,
+                                    topic: topic
+                                })
+                            }
+                        );
+
+                    const data =
+                        await response.json();
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.error ||
+                            "PHYSICA could not process the request."
+                        );
+
+                    }
+
+                    if (loadingMessage) {
+
+                        loadingMessage.remove();
+
+                    }
+
+                    addMessage(
+                        data.answer ||
+                        "PHYSICA did not return an answer.",
+                        "ai"
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "PHYSICA error:",
+                        error
+                    );
+
+
+                    if (loadingMessage) {
+
+                        loadingMessage.remove();
+
+                    }
+
+
+                    addMessage(
+                        "Something went wrong while connecting to PHYSICA. Please try again.",
+                        "ai"
+                    );
+
+
+                } finally {
+
+                    chatMessage.disabled = false;
+
+                    chatButton.disabled = false;
+
+                    chatMessage.focus();
+
+                }
+
+            }
+        );
+
+    }
+
+});
