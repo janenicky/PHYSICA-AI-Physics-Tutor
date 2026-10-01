@@ -1,185 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHYSICA — AI Physics Tutor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>PHYSICA — AI Physics Tutor</title>
 
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header class="navbar">
-    <a href="index.html" class="logo">PHYSICA</a>
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        PHYSICA
+    </a>
 
     <nav>
-      <a href="#topics">Topics</a>
-      <a href="tutor.html">AI Tutor</a>
-      <a href="#about">About</a>
+        <a href="#topics">Topics</a>
+        <a href="tutor.html">AI Tutor</a>
+        <a href="#about">About</a>
     </nav>
 
-    <a href="tutor.html" class="nav-button">Try AI Tutor</a>
-  </header>
+    <a href="tutor.html" class="nav-button">
+        Try AI Tutor
+    </a>
 
-  <main>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
     <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">AI-POWERED PHYSICS LEARNING</p>
 
-        <h1>
-          Learn physics.
-          <span>Actually understand it.</span>
-        </h1>
+        <div class="hero-content">
 
-        <p class="hero-text">
-          PHYSICA is an AI-powered physics tutor designed to help you understand
-          concepts, solve problems, and think like a physicist.
-        </p>
+            <p class="eyebrow">
+                AI-POWERED PHYSICS LEARNING
+            </p>
 
-        <div class="hero-buttons">
-          <a href="#topics" class="primary-button">Start learning</a>
-          <a href="tutor.html" class="secondary-button">Meet your AI Tutor →</a>
+            <h1>
+                Learn physics.
+                <span>Actually understand it.</span>
+            </h1>
+
+            <p class="hero-text">
+                PHYSICA is an AI-powered physics tutor designed to help you
+                understand concepts, solve problems, and think like a physicist.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#topics" class="primary-button">
+                    Start learning
+                </a>
+
+                <a href="tutor.html" class="secondary-button">
+                    Meet your AI Tutor →
+                </a>
+
+            </div>
+
         </div>
-      </div>
 
-      <div class="hero-visual">
-        <div class="physics-card" id="physics-card">
-          <div class="physics-glow"></div>
 
-          <div class="orbit orbit-large">
-            <span class="particle"></span>
-          </div>
+        <!-- PHYSICS VISUAL -->
 
-          <div class="orbit orbit-medium">
-            <span class="particle"></span>
-          </div>
+        <div class="hero-visual">
 
-          <div class="orbit orbit-small">
-            <span class="particle"></span>
-          </div>
+            <div class="physics-card" id="physics-card">
 
-          <div class="planet"></div>
+                <div class="physics-glow"></div>
 
-          <div class="formula formula-one">F = ma</div>
-          <div class="formula formula-two">E = mc²</div>
-          <div class="formula formula-three">Δp = FΔt</div>
+                <div class="orbit orbit-large">
+                    <span class="particle particle-large"></span>
+                </div>
 
-          <div class="physics-label">PHYSICS / 01</div>
+                <div class="orbit orbit-medium">
+                    <span class="particle particle-medium"></span>
+                </div>
+
+                <div class="orbit orbit-small">
+                    <span class="particle particle-small"></span>
+                </div>
+
+                <div class="planet"></div>
+
+                <div class="formula formula-one">
+                    F = ma
+                </div>
+
+                <div class="formula formula-two">
+                    E = mc²
+                </div>
+
+                <div class="formula formula-three">
+                    Δp = FΔt
+                </div>
+
+                <div class="physics-label">
+                    PHYSICS / 01
+                </div>
+
+            </div>
+
         </div>
-      </div>
+
     </section>
+
+
+    <!-- TOPICS -->
 
     <section id="topics" class="topics">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">EXPLORE PHYSICS</p>
-          <h2>Choose a universe to explore.</h2>
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    EXPLORE PHYSICS
+                </p>
+
+                <h2>
+                    Choose a universe
+                    to explore.
+                </h2>
+
+            </div>
+
+            <p class="section-description">
+                Start with a topic,
+                then ask PHYSICA anything.
+            </p>
+
         </div>
 
-        <p class="section-description">
-          Start with a topic, then ask PHYSICA anything.
-        </p>
-      </div>
 
-      <div class="topic-grid">
-        <a class="topic-card" href="tutor.html?topic=Mechanics">
-          <span class="topic-number">01</span>
-          <span class="topic-arrow">↗</span>
-          <h3>Mechanics</h3>
-          <p>Motion, forces, energy and momentum.</p>
-        </a>
+        <div class="topic-grid">
 
-        <a class="topic-card" href="tutor.html?topic=Electricity">
-          <span class="topic-number">02</span>
-          <span class="topic-arrow">↗</span>
-          <h3>Electricity</h3>
-          <p>Fields, circuits and electromagnetic phenomena.</p>
-        </a>
+            <a
+                class="topic-card"
+                href="tutor.html?topic=Mechanics"
+            >
 
-        <a class="topic-card" href="tutor.html?topic=Waves">
-          <span class="topic-number">03</span>
-          <span class="topic-arrow">↗</span>
-          <h3>Waves</h3>
-          <p>Oscillations, sound, light and interference.</p>
-        </a>
+                <span class="topic-number">01</span>
+                <span class="topic-arrow">↗</span>
 
-        <a class="topic-card" href="tutor.html?topic=Thermodynamics">
-          <span class="topic-number">04</span>
-          <span class="topic-arrow">↗</span>
-          <h3>Thermodynamics</h3>
-          <p>Heat, temperature and energy.</p>
-        </a>
-      </div>
+                <h3>Mechanics</h3>
+
+                <p>
+                    Motion, forces, energy
+                    and momentum.
+                </p>
+
+            </a>
+
+
+            <a
+                class="topic-card"
+                href="tutor.html?topic=Electricity"
+            >
+
+                <span class="topic-number">02</span>
+                <span class="topic-arrow">↗</span>
+
+                <h3>Electricity</h3>
+
+                <p>
+                    Fields, circuits and
+                    electromagnetic phenomena.
+                </p>
+
+            </a>
+
+
+            <a
+                class="topic-card"
+                href="tutor.html?topic=Waves"
+            >
+
+                <span class="topic-number">03</span>
+                <span class="topic-arrow">↗</span>
+
+                <h3>Waves</h3>
+
+                <p>
+                    Oscillations, sound,
+                    light and interference.
+                </p>
+
+            </a>
+
+
+            <a
+                class="topic-card"
+                href="tutor.html?topic=Thermodynamics"
+            >
+
+                <span class="topic-number">04</span>
+                <span class="topic-arrow">↗</span>
+
+                <h3>Thermodynamics</h3>
+
+                <p>
+                    Heat, temperature
+                    and energy.
+                </p>
+
+            </a>
+
+        </div>
+
     </section>
 
-    <section id="tutor" class="tutor-preview">
-      <div class="tutor-intro">
-        <p class="eyebrow">YOUR AI PHYSICS TUTOR</p>
 
-        <h2>
-          Don't just get the answer.
-          <span>Understand why.</span>
-        </h2>
+    <!-- AI TUTOR PREVIEW -->
 
-        <p>
-          Ask a question, describe what confuses you, or bring a problem
-          you're stuck on. PHYSICA guides you through the reasoning step by step.
-        </p>
+    <section class="tutor-preview">
 
-        <a href="tutor.html" class="primary-button">Open PHYSICA AI →</a>
-      </div>
+        <div class="tutor-intro">
 
-      <div class="chat-preview">
-        <div class="chat-header">
-          <div class="mini-ai-avatar">
-            <div class="mini-core"></div>
-            <div class="mini-orbit mini-one"></div>
-            <div class="mini-orbit mini-two"></div>
-          </div>
+            <p class="eyebrow">
+                YOUR AI PHYSICS TUTOR
+            </p>
 
-          <div class="chat-identity">
-            <strong>PHYSICA AI</strong>
-            <small>Physics tutor</small>
-          </div>
+            <h2>
+                Don't just get
+                the answer.
+                <span>Understand why.</span>
+            </h2>
 
-          <div class="preview-online">
-            <span></span>
-            ONLINE
-          </div>
+            <p>
+                Ask a question, describe what confuses you,
+                or bring a problem you're stuck on.
+                PHYSICA guides you through the reasoning step by step.
+            </p>
+
+            <a href="tutor.html" class="primary-button">
+                Open PHYSICA AI →
+            </a>
+
         </div>
 
-        <div class="preview-messages">
-          <div class="message ai">
-            <p>Hi! What are you working on today?</p>
-          </div>
 
-          <div class="message user">
-            <p>I don't understand Newton's second law.</p>
-          </div>
+        <div class="chat-preview">
 
-          <div class="message ai">
-            <p>Let's figure it out together.</p>
-            <p>What happens to acceleration when the force increases?</p>
-          </div>
+            <div class="chat-header">
+
+                <div class="mini-ai-avatar">
+
+                    <div class="mini-core"></div>
+
+                    <div class="mini-orbit mini-one">
+                        <span></span>
+                    </div>
+
+                    <div class="mini-orbit mini-two">
+                        <span></span>
+                    </div>
+
+                </div>
+
+
+                <div class="chat-identity">
+
+                    <strong>
+                        PHYSICA AI
+                    </strong>
+
+                    <small>
+                        Physics tutor
+                    </small>
+
+                </div>
+
+
+                <div class="preview-online">
+                    <span></span>
+                    ONLINE
+                </div>
+
+            </div>
+
+
+            <div class="preview-messages">
+
+                <div class="message ai">
+                    Hi! What are you working on today?
+                </div>
+
+                <div class="message user">
+                    I don't understand Newton's second law.
+                </div>
+
+                <div class="message ai">
+
+                    Let's figure it out together.
+
+                    <br><br>
+
+                    What do you think happens to an object's
+                    acceleration when the force acting on it increases?
+
+                </div>
+
+            </div>
+
+
+            <div class="chat-preview-input">
+
+                <span>
+                    Ask PHYSICA anything...
+                </span>
+
+                <span class="preview-arrow">
+                    →
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="chat-preview-input">
-          <span>Ask PHYSICA anything...</span>
-          <span class="preview-arrow">→</span>
-        </div>
-      </div>
     </section>
-  </main>
 
-  <footer id="about">
-    <strong>PHYSICA</strong>
-    <p>Learn. Question. Understand.</p>
-  </footer>
+</main>
 
-  <script src="script.js"></script>
+
+<footer id="about">
+
+    <strong>
+        PHYSICA
+    </strong>
+
+    <p>
+        Learn. Question. Understand.
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
