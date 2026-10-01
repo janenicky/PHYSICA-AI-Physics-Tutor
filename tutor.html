@@ -22,198 +22,200 @@
 
 <body class="tutor-page">
 
-    <header class="navbar">
 
-        <a
-            href="index.html"
-            class="logo"
-        >
-            PHYSICA
+<header class="navbar">
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+        PHYSICA
+    </a>
+
+
+    <nav>
+
+        <a href="index.html#topics">
+            Topics
         </a>
 
-
-        <nav>
-
-            <a href="index.html#topics">
-                Topics
-            </a>
-
-            <a href="tutor.html">
-                AI Tutor
-            </a>
-
-            <a href="index.html#about">
-                About
-            </a>
-
-        </nav>
-
-
-        <a
-            href="index.html"
-            class="nav-button"
-        >
-            ← Back
+        <a href="tutor.html">
+            AI Tutor
         </a>
 
-    </header>
+        <a href="index.html#about">
+            About
+        </a>
+
+    </nav>
 
 
-    <main>
+    <a
+        href="index.html"
+        class="nav-button"
+    >
+        ← Back
+    </a>
+
+</header>
 
 
-        <section class="real-tutor">
-            
-            <div class="real-tutor-intro">
+
+<main class="tutor-main">
 
 
-                <p class="eyebrow">
-                    YOUR AI PHYSICS TUTOR
-                </p>
+    <section class="real-tutor">
 
 
-                <h1>
-                    Think like a
-                    physicist.
-                </h1>
+        <div class="real-tutor-intro">
+
+            <p class="eyebrow">
+                YOUR AI PHYSICS TUTOR
+            </p>
 
 
-                <p>
-
-                    Ask questions,
-                    explore concepts,
-                    and work through
-                    problems with PHYSICA.
-
-                </p>
+            <h1>
+                Think like a
+                <span>physicist.</span>
+            </h1>
 
 
-                <div class="topic-indicator">
+            <p>
 
-                    <span class="topic-dot"></span>
+                Ask questions, explore concepts,
+                and work through problems with PHYSICA.
 
-                    <span id="current-topic">
-                        General Physics
-                    </span>
+            </p>
 
-                </div>
 
+            <div class="topic-indicator">
+
+                <span class="topic-dot"></span>
+
+                <span id="current-topic">
+                    General Physics
+                </span>
 
             </div>
 
-            <div class="real-chat">
-
-                <div class="real-chat-header">
-
-
-                    <div class="ai-avatar">
-
-                        <div class="mini-core"></div>
-
-                        <div class="mini-orbit mini-orbit-one"></div>
-
-                        <div class="mini-orbit mini-orbit-two"></div>
-
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            PHYSICA AI
-                        </strong>
-
-                        <small>
-                            Your physics tutor
-                        </small>
-
-                    </div>
-
-
-                    <div class="online-indicator">
-
-                        <span></span>
-
-                        ONLINE
-
-                    </div>
-
-                </div>
-
-                <div
-                    class="real-messages"
-                    id="messages"
-                >
-
-                    <div class="message ai">
-
-                        Hi! I'm PHYSICA.
-
-                        <br><br>
-
-                        What would you like
-                        to understand today?
-
-                    </div>
-
-                </div>
-
-                <form
-                    class="real-chat-input"
-                    id="chat-form"
-                >
-
-
-                    <input
-                        type="text"
-                        id="chat-message"
-                        placeholder="Ask PHYSICA anything..."
-                        autocomplete="off"
-                        required
-                    >
-
-
-                    <button
-                        type="submit"
-                        id="chat-send"
-                        aria-label="Send message"
-                    >
-                        →
-                    </button>
-
-                </form>
-
-
-                <p class="chat-hint">
-
-                    PHYSICA guides you toward
-                    understanding, not just
-                    the final answer.
-
-                </p>
-
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <div>
-            PHYSICA
         </div>
 
-        <p>
-            Learn. Question. Understand.
-        </p>
-
-    </footer>
+        <div class="real-chat">
 
 
-    <script src="tutor.js"></script>
+            <div class="real-chat-header">
+
+
+                <div class="ai-avatar">
+
+                    <div class="mini-core"></div>
+
+                    <div class="mini-orbit mini-one"></div>
+
+                    <div class="mini-orbit mini-two"></div>
+
+                </div>
+
+
+                <div class="ai-title">
+
+                    <strong>
+                        PHYSICA AI
+                    </strong>
+
+                    <small>
+                        Your physics tutor
+                    </small>
+
+                </div>
+
+
+                <div class="online-indicator">
+
+                    <span></span>
+
+                    ONLINE
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                class="real-messages"
+                id="messages"
+            >
+
+                <div class="message ai">
+
+                    Hi! I'm PHYSICA.
+
+                    <br><br>
+
+                    What would you like
+                    to understand today?
+
+                </div>
+
+            </div>
+
+
+
+            <form
+                class="real-chat-input"
+                id="chat-form"
+            >
+
+                <input
+                    id="chat-message"
+                    type="text"
+                    placeholder="Ask PHYSICA anything..."
+                    autocomplete="off"
+                    required
+                >
+
+
+                <button
+                    id="chat-send"
+                    type="submit"
+                >
+                    →
+                </button>
+
+            </form>
+
+
+            <p class="chat-hint">
+
+                PHYSICA guides you toward
+                understanding, not just
+                the final answer.
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer>
+
+    <div>
+        PHYSICA
+    </div>
+
+    <p>
+        Learn. Question. Understand.
+    </p>
+
+</footer>
+
+
+<script src="tutor.js"></script>
 
 </body>
 
