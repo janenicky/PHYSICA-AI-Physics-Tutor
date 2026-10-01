@@ -15,3 +15,20 @@ tryTutor.addEventListener("click", function () {
         behavior: "smooth"
     });
 });
+
+const topicCards = document.querySelectorAll(".topic-card");
+
+topicCards.forEach(function (card) {
+
+    card.addEventListener("click", function () {
+
+        topicCards.forEach(function (otherCard) {
+            otherCard.classList.remove("selected");
+        });
+
+        card.classList.add("selected");
+
+        console.log("Selected topic:", card.dataset.topic);
+    });
+
+});
