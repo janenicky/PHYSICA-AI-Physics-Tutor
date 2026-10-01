@@ -141,74 +141,175 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+const chatForm =
+    document.getElementById("chat-form");
+
+const chatMessage =
+    document.getElementById("chat-message");
+
 const chatDemoButton =
     document.getElementById("chat-demo-button");
 
-chatDemoButton.addEventListener("click", async function () {
+const messagesContainer =
+    document.querySelector(".messages");
 
-    const message = prompt(
-        "Ask PHYSICA a physics question:"
+
+function addMessage(text, type) {
+
+    const messageElement =
+        document.createElement("div");
+
+    messageElement.classList.add(
+        "message",
+        type
     );
 
-    if (!message || message.trim() === "") {
-        return;
-    }
+    messageElement.textContent = text;
 
-    const selectedCard =
-        document.querySelector(".topic-card.selected");
+    messagesContainer.appendChild(
+        messageElement
+    );
 
-    const topic =
-        selectedCard
-            ? selectedCard.dataset.topic
-            : "General Physics";
+    messagesContainer.scrollTop =
+        messagesContainer.scrollHeight;
 
-    chatDemoButton.textContent = "Thinking...";
+}
 
-    try {
 
-        const response = await fetch(
-            "https://soft-frost-e73a.nikjena09-09.workers.dev/",
-            {
-                method: "POST",
+function addLoadingMessage() {
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+    const loadingElement =
+        document.createElement("div");
 
-                body: JSON.stringify({
-                    message: message,
-                    topic: topic
-                })
-            }
-        );
+    loadingElement.classList.add(
+        "message",
+        "ai",
+        "loading-message"
+    );
 
-        const data = await response.json();
+    loadingElement.textContent =
+        "PHYSICA is thinking...";
 
-        if (!response.ok) {
-            throw new Error(
-                data.error || "Something went wrong."
-            );
+    messagesContainer.appendChild(
+        loadingElement
+    );
+
+    messagesContainer.scrollTop =
+        messagesContainer.scrollHeight;
+
+    return loadingElement;
+
+}
+
+
+chatForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+        const message =
+            chatMessage.value.trim();
+
+        if (!message) {
+            return;
         }
 
-        alert(
-            "PHYSICA AI:\n\n" +
-            data.answer
+        const selectedCard =
+            document.querySelector(
+                ".topic-card.selected"
+            );
+
+        const topic =
+            selectedCard
+                ? selectedCard.dataset.topic
+                : "General Physics";
+
+
+        addMessage(
+            message,
+            "user"
         );
 
-    } catch (error) {
+        chatMessage.value = "";
 
-        console.error("PHYSICA error:", error);
+        chatMessage.disabled = true;
+        chatDemoButton.disabled = true;
 
-        alert(
-            "PHYSICA could not connect to the AI tutor.\n\n" +
-            error.message
-        );
+
+        const loadingMessage =
+            addLoadingMessage();
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "https://soft-frost-e73a.nikjena09-09.workers.dev/",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            message: message,
+                            topic: topic
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Something went wrong."
+                );
+
+            }
+
+
+            loadingMessage.remove();
+
+
+            addMessage(
+                data.answer,
+                "ai"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "PHYSICA error:",
+                error
+            );
+
+
+            loadingMessage.remove();
+
+
+            addMessage(
+                "I couldn't connect to PHYSICA right now. Please try again.",
+                "ai"
+            );
+
 
         } finally {
 
-        chatDemoButton.textContent = "Try AI Tutor";
+            chatMessage.disabled = false;
+            chatDemoButton.disabled = false;
+
+            chatMessage.focus();
+
+        }
 
     }
-
-});
-});
+);
