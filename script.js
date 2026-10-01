@@ -1,5 +1,6 @@
 const startLearning = document.getElementById("start-learning");
 const topicsSection = document.getElementById("topics");
+const selectedTopic = document.getElementById("selected-topic");
 
 startLearning.addEventListener("click", function () {
     topicsSection.scrollIntoView({
@@ -28,7 +29,8 @@ topicCards.forEach(function (card) {
 
         card.classList.add("selected");
 
-        console.log("Selected topic:", card.dataset.topic);
+        selectedTopic.textContent =
+    "Selected topic: " + card.dataset.topic;
     });
 
 });
