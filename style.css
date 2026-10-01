@@ -769,3 +769,12 @@ body::after {
 
     transform: translateY(-2px);
 }
+
+.topic-info {
+    margin-top: 40px;
+}
+
+#selected-topic {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
