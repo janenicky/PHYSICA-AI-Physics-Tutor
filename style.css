@@ -531,3 +531,56 @@ footer {
         text-align: center;
     }
 }
+
+/* =========================
+   BACKGROUND EFFECT
+========================= */
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 600px;
+    height: 600px;
+
+    top: -250px;
+    right: -200px;
+
+    background: radial-gradient(
+        circle,
+        rgba(124, 140, 255, 0.12),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    bottom: -250px;
+    left: -200px;
+
+    background: radial-gradient(
+        circle,
+        rgba(80, 110, 255, 0.08),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    z-index: -1;
+}
