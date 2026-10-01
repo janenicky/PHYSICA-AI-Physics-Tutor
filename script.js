@@ -204,13 +204,11 @@ chatDemoButton.addEventListener("click", async function () {
             error.message
         );
 
-    } finally {
+        } finally {
 
         chatDemoButton.textContent = "Try AI Tutor";
 
     }
 
 });
-    });
-
 });
