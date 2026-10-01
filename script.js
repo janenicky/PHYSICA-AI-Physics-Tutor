@@ -7,4 +7,11 @@ startLearning.addEventListener("click", function () {
     });
 });
 
+const tryTutor = document.getElementById("try-tutor");
+const tutorSection = document.getElementById("tutor");
 
+tryTutor.addEventListener("click", function () {
+    tutorSection.scrollIntoView({
+        behavior: "smooth"
+    });
+});
