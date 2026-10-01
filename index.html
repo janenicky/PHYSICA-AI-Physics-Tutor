@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PHYSICA - AI Physics Tutor</title>
+    <title>PHYSICA — AI Physics Tutor</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,9 +22,13 @@
             <a href="#about">About</a>
         </nav>
 
-        <button class="nav-button" id="try-tutor">
-    Try AI Tutor
-</button>
+        <button
+            class="nav-button"
+            id="try-tutor"
+            type="button"
+        >
+            Try AI Tutor
+        </button>
 
     </header>
 
@@ -51,11 +56,18 @@
 
                 <div class="hero-buttons">
 
-                   <button class="primary-button" id="start-learning">
-    Start learning
-</button>
+                    <button
+                        class="primary-button"
+                        id="start-learning"
+                        type="button"
+                    >
+                        Start learning
+                    </button>
 
-                    <a href="#tutor" class="secondary-button">
+                    <a
+                        href="#tutor"
+                        class="secondary-button"
+                    >
                         Meet your AI Tutor →
                     </a>
 
@@ -63,125 +75,161 @@
 
             </div>
 
-
             <div class="hero-visual">
 
                 <div class="physics-card">
 
-    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
 
-    <div class="orbit orbit-two"></div>
+                    <div class="planet"></div>
 
-    <div class="planet"></div>
+                    <div class="formula">
+                        F = ma
+                    </div>
 
-    <div class="formula">
-        F = ma
-    </div>
+                    <div class="formula formula-two">
+                        E = mc²
+                    </div>
 
-    <div class="formula formula-two">
-        E = mc²
-    </div>
-
-</div>
+                </div>
 
             </div>
 
         </section>
 
+        <section
+            id="topics"
+            class="topics"
+        >
 
-        <section id="topics" class="topics">
-
-            <p class="eyebrow">EXPLORE PHYSICS</p>
+            <p class="eyebrow">
+                EXPLORE PHYSICS
+            </p>
 
             <h2>
                 Choose a universe to explore.
             </h2>
 
-<div class="topic-grid">
+            <div class="topic-grid">
 
-    <article class="topic-card" data-topic="Mechanics">
+                <article
+                    class="topic-card"
+                    data-topic="Mechanics"
+                    tabindex="0"
+                >
 
-        <span>01</span>
+                    <span>01</span>
 
-        <h3>Mechanics</h3>
+                    <h3>
+                        Mechanics
+                    </h3>
 
-        <p>
-            Motion, forces, energy and momentum.
-        </p>
+                    <p>
+                        Motion, forces, energy and momentum.
+                    </p>
 
-    </article>
-
-
-    <article class="topic-card" data-topic="Electricity">
-
-        <span>02</span>
-
-        <h3>Electricity</h3>
-
-        <p>
-            Fields, circuits and electromagnetic phenomena.
-        </p>
-
-    </article>
+                </article>
 
 
-    <article class="topic-card" data-topic="Waves">
+                <article
+                    class="topic-card"
+                    data-topic="Electricity"
+                    tabindex="0"
+                >
 
-        <span>03</span>
+                    <span>02</span>
 
-        <h3>Waves</h3>
+                    <h3>
+                        Electricity
+                    </h3>
 
-        <p>
-            Oscillations, sound, light and interference.
-        </p>
+                    <p>
+                        Fields, circuits and electromagnetic phenomena.
+                    </p>
 
-    </article>
-
-
-    <article class="topic-card" data-topic="Thermodynamics">
-
-        <span>04</span>
-
-        <h3>Thermodynamics</h3>
-
-        <p>
-            Heat, temperature and the laws of energy.
-        </p>
-
-    </article>
-
-</div>
+                </article>
 
 
-<p id="selected-topic">
-    Select a topic to begin.
-</p>
+                <article
+                    class="topic-card"
+                    data-topic="Waves"
+                    tabindex="0"
+                >
+
+                    <span>03</span>
+
+                    <h3>
+                        Waves
+                    </h3>
+
+                    <p>
+                        Oscillations, sound, light and interference.
+                    </p>
+
+                </article>
 
 
-<div class="topic-info" id="topic-info">
+                <article
+                    class="topic-card"
+                    data-topic="Thermodynamics"
+                    tabindex="0"
+                >
 
-    <h3 id="topic-title">
-        Explore a topic
-    </h3>
+                    <span>04</span>
 
-    <p id="topic-description">
-        Choose one of the topics above to begin your journey through physics.
-    </p>
+                    <h3>
+                        Thermodynamics
+                    </h3>
 
-    <button id="topic-start">
-        Explore with PHYSICA →
-    </button>
+                    <p>
+                        Heat, temperature and the laws of energy.
+                    </p>
 
-</div>
+                </article>
+
+            </div>
+
+            <p id="selected-topic">
+                Select a topic to begin.
+            </p>
+
+
+            <div
+                class="topic-info"
+                id="topic-info"
+            >
+
+                <h3 id="topic-title">
+                    Explore a topic
+                </h3>
+
+                <p id="topic-description">
+                    Choose one of the topics above to begin
+                    your journey through physics.
+                </p>
+
+                <button
+                    id="topic-start"
+                    type="button"
+                >
+                    Explore with PHYSICA →
+                </button>
+
+            </div>
 
         </section>
 
-
-        <section id="tutor" class="tutor">
+        <section
+            id="tutor"
+            class="tutor"
+        >
 
             <div class="tutor-intro">
 
-                <p class="eyebrow">YOUR AI PHYSICS TUTOR</p>
+                <p class="eyebrow">
+                    YOUR AI PHYSICS TUTOR
+                </p>
 
                 <h2>
                     Don't just get the answer.
@@ -196,16 +244,17 @@
 
             </div>
 
-
             <div class="chat-preview">
 
                 <div class="chat-header">
+
                     <div class="status"></div>
 
                     <div>
                         <strong>PHYSICA AI</strong>
                         <small>Physics tutor</small>
                     </div>
+
                 </div>
 
 
@@ -230,9 +279,16 @@
 
                 <div class="chat-input">
 
-                    <span>Ask PHYSICA anything...</span>
+                    <span>
+                        Ask PHYSICA anything...
+                    </span>
 
-                    <button>→</button>
+                    <button
+                        id="chat-demo-button"
+                        type="button"
+                    >
+                        →
+                    </button>
 
                 </div>
 
@@ -245,7 +301,9 @@
 
     <footer id="about">
 
-        <p>PHYSICA — Learn. Question. Understand.</p>
+        <p>
+            PHYSICA — Learn. Question. Understand.
+        </p>
 
     </footer>
 
@@ -253,4 +311,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
