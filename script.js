@@ -1,6 +1,14 @@
 const startLearning = document.getElementById("start-learning");
 const topicsSection = document.getElementById("topics");
 const selectedTopic = document.getElementById("selected-topic");
+const topicTitle = 
+    document.getElementById("topic-title");
+
+const topicDescription =
+    document.getElementById("topic-description");
+
+const topicStart =
+    document.getElementById("topic-start");
 
 startLearning.addEventListener("click", function () {
     topicsSection.scrollIntoView({
@@ -32,5 +40,41 @@ topicCards.forEach(function (card) {
         selectedTopic.textContent =
     "Selected topic: " + card.dataset.topic;
     });
+        const topic =
+    topics[card.dataset.topic];
+
+topicTitle.textContent =
+    topic.title;
+
+topicDescription.textContent =
+    topic.description;
 
 });
+
+const topics = {
+
+    Mechanics: {
+        title: "Mechanics",
+        description:
+            "Explore motion, forces, energy and momentum — and understand why objects move the way they do."
+    },
+
+    Electricity: {
+        title: "Electricity",
+        description:
+            "Discover electric fields, circuits, voltage and current, and see how they connect."
+    },
+
+    Waves: {
+        title: "Waves",
+        description:
+            "Explore oscillations, sound, light and interference through the language of waves."
+    },
+
+    Thermodynamics: {
+        title: "Thermodynamics",
+        description:
+            "Understand heat, temperature, energy transfer and the laws that govern physical systems."
+    }
+
+};
