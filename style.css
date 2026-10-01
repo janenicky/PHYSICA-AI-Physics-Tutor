@@ -317,6 +317,12 @@ a {
     gap: 15px;
 }
 
+#selected-topic {
+    color: #7c8cff;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
 .topic-card {
     min-height: 240px;
 
