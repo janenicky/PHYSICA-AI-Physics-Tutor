@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    
-    const startLearning =
+
+    const startButton =
         document.querySelector(
             'a[href="#topics"]'
         );
@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("topics");
 
 
-    if (startLearning && topics) {
+    if (startButton && topics) {
 
-        startLearning.addEventListener(
+        startButton.addEventListener(
             "click",
             function (event) {
 
@@ -49,46 +49,57 @@ document.addEventListener("DOMContentLoaded", function () {
         function (event) {
 
             const x =
-                (event.clientX / window.innerWidth) - 0.5;
+                event.clientX /
+                window.innerWidth -
+                0.5;
+
 
             const y =
-                (event.clientY / window.innerHeight) - 0.5;
+                event.clientY /
+                window.innerHeight -
+                0.5;
 
 
             targetX =
-                x * 12;
+                x * 9;
+
 
             targetY =
-                y * -12;
+                y * -9;
 
         }
     );
 
 
-    function animatePhysics() {
+    function animate() {
 
         currentX +=
             (targetX - currentX) * 0.05;
+
 
         currentY +=
             (targetY - currentY) * 0.05;
 
 
-        physicsCard.style.transform =
-            `
-            rotateX(${currentY}deg)
-            rotateY(${currentX}deg)
-            `;
+        physicsCard.style.setProperty(
+            "--mouse-x",
+            `${currentX}deg`
+        );
+
+
+        physicsCard.style.setProperty(
+            "--mouse-y",
+            `${currentY}deg`
+        );
 
 
         requestAnimationFrame(
-            animatePhysics
+            animate
         );
 
     }
 
 
-    animatePhysics();
-
+    animate();
 
 });
