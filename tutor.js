@@ -507,6 +507,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     );
 
+                console.log("PHYSICA sending:", {
+    messages: chatHistory,
+    topic: topic
+});
+
 
                 const raw =
                     await response.text();
