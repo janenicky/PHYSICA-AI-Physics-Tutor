@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const WORKER_URL =
         "https://soft-frost-e73a.nikjena09-09.workers.dev/";
+    let chatHistory = [];
 
 
     /* =====================================================
@@ -465,6 +466,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 "user"
             );
 
+            chatHistory.push({
+    role: "user",
+    content: userMessage
+});
+
 
             input.value = "";
 
@@ -490,14 +496,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                     "application/json"
                             },
 
-                            body:
-                                JSON.stringify({
-                                    message:
-                                        userMessage,
+                           body:
+    JSON.stringify({
+        messages:
+            chatHistory,
 
-                                    topic:
-                                        topic
-                                })
+        topic:
+            topic
+    })
                         }
                     );
 
@@ -552,6 +558,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     "ai",
                     true
                 );
+
+                chatHistory.push({
+    role: "assistant",
+    content: data.answer
+});
 
 
             } catch (error) {
