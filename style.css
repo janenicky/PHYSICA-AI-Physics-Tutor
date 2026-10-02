@@ -1418,14 +1418,12 @@ footer p {
 .real-tutor-intro h1 span {
     display: block;
 
-    color: var(--accent);
+    color: #8994ff;
 
     text-shadow:
-        0 0 18px rgba(127,140,255,.16),
-        0 0 45px rgba(127,140,255,.08);
-
-    animation:
-        titleGlow 5s ease-in-out infinite;
+        0 0 8px rgba(127, 140, 255, .22),
+        0 0 28px rgba(127, 140, 255, .16),
+        0 0 65px rgba(127, 140, 255, .08);
 }
 
 @keyframes titleGlow {
@@ -1897,21 +1895,17 @@ footer p {
     display: flex;
     align-items: center;
 
-    border: 1px solid rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.11);
     border-radius: 14px;
 
-    background: rgba(13, 18, 30, .62);
+    background: rgba(18, 24, 40, .48);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 8px 30px rgba(0,0,0,.12);
-
-    transition:
-        border-color .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        inset 0 1px 0 rgba(255,255,255,.025),
+        0 8px 30px rgba(0,0,0,.16);
 }
 
 .real-chat-input:focus-within {
