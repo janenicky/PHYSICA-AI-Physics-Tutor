@@ -1416,12 +1416,39 @@ footer p {
 
 
 .real-tutor-intro h1 span {
-
     display: block;
 
     color: var(--accent);
+
+    text-shadow:
+        0 0 18px rgba(127,140,255,.16),
+        0 0 45px rgba(127,140,255,.08);
+
+    animation:
+        titleGlow 5s ease-in-out infinite;
 }
 
+@keyframes titleGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 18px rgba(127,140,255,.14),
+            0 0 45px rgba(127,140,255,.06);
+    }
+
+    50% {
+        text-shadow:
+            0 0 22px rgba(127,140,255,.22),
+            0 0 55px rgba(127,140,255,.10);
+    }
+
+}
+
+.real-tutor-intro h1 {
+    text-shadow:
+        0 0 30px rgba(255,255,255,.035);
+}
 
 .tutor-description {
 
@@ -1630,7 +1657,6 @@ footer p {
 /* particles for avatar */
 
 .avatar-orbit::after {
-
     content: "";
 
     position: absolute;
@@ -1645,14 +1671,12 @@ footer p {
 
     border-radius: 50%;
 
-    background:
-        #aab3ff;
+    background: #c3c9ff;
 
     box-shadow:
-        0 0 10px
-        #8290ff;
+        0 0 8px #aab3ff,
+        0 0 18px rgba(127,140,255,.75);
 }
-
 
 .orbit-a::after {
     animation:
@@ -1866,25 +1890,39 @@ footer p {
 ========================================================= */
 
 .real-chat-input {
-
-    margin:
-        0 17px 10px;
+    margin: 0 17px 10px;
 
     min-height: 64px;
 
     display: flex;
-
     align-items: center;
 
-    border:
-        1px solid rgba(255,255,255,.10);
-
+    border: 1px solid rgba(255,255,255,.10);
     border-radius: 14px;
 
-    background:
-        rgba(7,10,17,.85);
+    background: rgba(13, 18, 30, .62);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.12);
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
+.real-chat-input:focus-within {
+    border-color: rgba(127,140,255,.35);
+
+    background: rgba(16, 21, 35, .72);
+
+    box-shadow:
+        0 0 0 3px rgba(127,140,255,.05),
+        0 8px 35px rgba(127,140,255,.08);
+}
 
 .real-chat-input input {
 
