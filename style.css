@@ -1350,7 +1350,9 @@ footer p {
 }
 
 
-/* Static orbit */
+/* =========================
+   AI AVATAR ORBITS
+   ========================= */
 
 .avatar-orbit {
     position: absolute;
@@ -1358,90 +1360,102 @@ footer p {
     left: 50%;
     top: 50%;
 
-    width: 47px;
-    height: 20px;
+    width: 48px;
+    height: 21px;
 
-    border: 1px solid rgba(137, 149, 255, .72);
+    border: 1px solid rgba(137, 149, 255, .7);
     border-radius: 50%;
 
-    transform: translate(-50%, -50%);
+    transform-origin: center center;
+
+    z-index: 2;
 }
 
 
-/* Orbit angles */
+/* First orbit */
 
 .orbit-a {
     transform:
         translate(-50%, -50%)
         rotate(-25deg);
+
+    animation: miniOrbitOne 4s linear infinite;
 }
+
+
+/* Second orbit */
 
 .orbit-b {
     transform:
         translate(-50%, -50%)
         rotate(55deg);
+
+    animation: miniOrbitTwo 5s linear infinite;
 }
 
 
-/* =================================
-   ELECTRON
-   ================================= */
+/* Glowing particle attached to orbit */
 
-.orbit-dot {
+.avatar-orbit::after {
+    content: "";
+
     position: absolute;
 
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: -3px;
 
     width: 5px;
     height: 5px;
 
     margin-left: -2.5px;
-    margin-top: -2.5px;
 
     border-radius: 50%;
 
-    background: #cbd1ff;
+    background: #c5ccff;
 
     box-shadow:
-        0 0 7px #aab3ff,
-        0 0 17px rgba(127, 140, 255, .95);
-
-    /*
-       THIS is the important part:
-       the particle follows an actual ellipse.
-    */
-
-    offset-path: ellipse(
-        23.5px 10px
-        at 50% 50%
-    );
-
-    offset-rotate: 0deg;
-
-    animation:
-        avatarElectron 3.2s linear infinite;
+        0 0 8px #aab3ff,
+        0 0 18px rgba(127, 140, 255, .9);
 }
 
 
-/* Second electron moves opposite direction */
+/* Orbit animations */
 
-.orbit-b .orbit-dot {
-    animation:
-        avatarElectron 4.2s linear infinite reverse;
-}
-
-
-@keyframes avatarElectron {
+@keyframes miniOrbitOne {
 
     from {
-        offset-distance: 0%;
+        transform:
+            translate(-50%, -50%)
+            rotate(-25deg)
+            rotate(0deg);
     }
 
     to {
-        offset-distance: 100%;
+        transform:
+            translate(-50%, -50%)
+            rotate(-25deg)
+            rotate(360deg);
     }
 }
+
+
+@keyframes miniOrbitTwo {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(55deg)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(55deg)
+            rotate(360deg);
+    }
+}
+
 .ai-name {
     min-width: 0;
 
