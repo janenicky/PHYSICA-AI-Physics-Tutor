@@ -488,39 +488,97 @@ button {
    HERO ORBIT PARTICLES
    ========================= */
 
+/* =========================
+   MOVING ELECTRONS
+   ========================= */
+
+.orbit {
+    overflow: visible;
+}
+
+/* Every electron starts exactly on its orbit */
 .orbit .particle {
     position: absolute;
 
     left: 50%;
-    top: -5px;
+    top: 50%;
 
     width: 9px;
     height: 9px;
 
-    margin-left: -4.5px;
+    margin: -4.5px 0 0 -4.5px;
 
     border-radius: 50%;
 
-    background: #b6beff;
+    background: #c5cbff;
 
     box-shadow:
-        0 0 18px #8290ff,
-        0 0 35px rgba(127, 140, 255, .7);
+        0 0 10px rgba(170, 179, 255, .95),
+        0 0 24px rgba(127, 140, 255, .75);
 
-    offset-path: ellipse(50% 50% at 0 0);
-    offset-rotate: 0deg;
+    transform-origin: 0 0;
+
+    pointer-events: none;
 }
 
+/* Large orbit */
 .particle-large {
-    animation: orbitParticle 8s linear infinite;
+    animation: electronLarge 8s linear infinite;
 }
 
+/* Medium orbit */
 .particle-medium {
-    animation: orbitParticle 6s linear infinite reverse;
+    animation: electronMedium 6s linear infinite reverse;
 }
 
+/* Small orbit */
 .particle-small {
-    animation: orbitParticle 4.5s linear infinite;
+    animation: electronSmall 4.5s linear infinite;
+}
+
+
+/* ---- Electron movement ---- */
+
+@keyframes electronLarge {
+    from {
+        transform:
+            rotate(0deg)
+            translateX(275px);
+    }
+
+    to {
+        transform:
+            rotate(360deg)
+            translateX(275px);
+    }
+}
+
+@keyframes electronMedium {
+    from {
+        transform:
+            rotate(0deg)
+            translateX(232px);
+    }
+
+    to {
+        transform:
+            rotate(360deg)
+            translateX(232px);
+    }
+}
+
+@keyframes electronSmall {
+    from {
+        transform:
+            rotate(0deg)
+            translateX(175px);
+    }
+
+    to {
+        transform:
+            rotate(360deg)
+            translateX(175px);
+    }
 }
 
 @keyframes orbitParticle {
@@ -1363,50 +1421,69 @@ footer p {
 }
 
 /* Moving particle around each avatar orbit */
+/* =========================
+   AI AVATAR — MOVING PARTICLES
+   ========================= */
+
 .avatar-orbit::after {
     content: "";
 
     position: absolute;
 
     left: 50%;
-    top: -3px;
+    top: 50%;
 
     width: 5px;
     height: 5px;
 
-    margin-left: -2.5px;
+    margin: -2.5px 0 0 -2.5px;
 
     border-radius: 50%;
 
-    background: #c3c9ff;
+    background: #cbd0ff;
 
     box-shadow:
         0 0 8px #aab3ff,
-        0 0 18px rgba(127, 140, 255, .75);
+        0 0 18px rgba(127, 140, 255, .9);
+
+    transform-origin: 0 0;
 }
 
 .orbit-a::after {
-    animation:
-        avatarParticleOne 3.5s linear infinite;
+    animation: avatarOrbitA 3s linear infinite;
 }
 
 .orbit-b::after {
-    animation:
-        avatarParticleTwo 4s linear infinite reverse;
+    animation: avatarOrbitB 4s linear infinite reverse;
 }
 
-@keyframes avatarParticleOne {
+@keyframes avatarOrbitA {
+    from {
+        transform:
+            rotate(0deg)
+            translateX(23px);
+    }
+
     to {
-        transform: rotate(360deg);
+        transform:
+            rotate(360deg)
+            translateX(23px);
     }
 }
 
-@keyframes avatarParticleTwo {
+@keyframes avatarOrbitB {
+    from {
+        transform:
+            rotate(0deg)
+            translateX(23px);
+    }
+
     to {
-        transform: rotate(360deg);
+        transform:
+            rotate(360deg)
+            translateX(23px);
     }
 }
-
 .ai-name {
     min-width: 0;
 
@@ -1570,6 +1647,10 @@ footer p {
    REAL CHAT INPUT
    ========================= */
 
+/* =========================
+   GLASS CHAT INPUT
+   ========================= */
+
 .real-chat-input {
     position: relative;
 
@@ -1580,23 +1661,26 @@ footer p {
     display: flex;
     align-items: center;
 
-    border: 1px solid rgba(255, 255, 255, .12);
+    overflow: hidden;
+
+    border: 1px solid rgba(170, 179, 255, .18);
     border-radius: 15px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, .045),
-            rgba(18, 24, 40, .50) 42%,
-            rgba(18, 24, 40, .40)
+            rgba(255, 255, 255, .075),
+            rgba(127, 140, 255, .045) 45%,
+            rgba(255, 255, 255, .025)
         );
 
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter: blur(28px) saturate(130%);
+    -webkit-backdrop-filter: blur(28px) saturate(130%);
 
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .055),
-        0 8px 30px rgba(0, 0, 0, .16);
+        inset 0 1px 0 rgba(255, 255, 255, .10),
+        inset 0 -1px 0 rgba(255, 255, 255, .025),
+        0 8px 30px rgba(0, 0, 0, .18);
 
     transition:
         border-color .25s ease,
@@ -1604,20 +1688,80 @@ footer p {
         background .25s ease;
 }
 
+
+/* Soft glass reflection */
+
+.real-chat-input::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 4%;
+
+    width: 92%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, .18),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+/* Soft ambient glow */
+
+.real-chat-input::after {
+    content: "";
+
+    position: absolute;
+
+    left: 18%;
+    bottom: -35px;
+
+    width: 64%;
+    height: 50px;
+
+    border-radius: 50%;
+
+    background: rgba(127, 140, 255, .08);
+
+    filter: blur(25px);
+
+    pointer-events: none;
+}
+
+
 .real-chat-input:focus-within {
-    border-color: rgba(127, 140, 255, .38);
+    border-color: rgba(137, 149, 255, .42);
 
     background:
         linear-gradient(
             135deg,
-            rgba(127, 140, 255, .065),
-            rgba(18, 24, 40, .58)
+            rgba(137, 149, 255, .095),
+            rgba(18, 24, 40, .34),
+            rgba(255, 255, 255, .035)
         );
 
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .065),
-        0 0 0 3px rgba(127, 140, 255, .045),
-        0 12px 38px rgba(127, 140, 255, .08);
+        inset 0 1px 0 rgba(255, 255, 255, .12),
+        0 0 0 3px rgba(127, 140, 255, .035),
+        0 10px 40px rgba(127, 140, 255, .10);
+}
+
+.real-chat-input input {
+    position: relative;
+    z-index: 2;
+}
+
+.real-chat-input button {
+    position: relative;
+    z-index: 2;
 }
 
 .real-chat-input input {
