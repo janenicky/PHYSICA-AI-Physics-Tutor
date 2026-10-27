@@ -514,6 +514,12 @@ button {
    HERO PARTICLES
    ========================================================= */
 
+/* =========================================================
+   PHYSICS ORBIT PARTICLES
+   The rings stay still.
+   Only the particles move around their own ring.
+   ========================================================= */
+
 .orbit .particle {
     position: absolute;
 
@@ -525,77 +531,234 @@ button {
 
     margin: -4.5px 0 0 -4.5px;
 
+    display: block;
+
     border-radius: 50%;
 
     background: #c7cdff;
 
     box-shadow:
         0 0 10px rgba(170, 179, 255, .95),
-        0 0 25px rgba(127, 140, 255, .75);
+        0 0 25px rgba(127, 140, 255, .75),
+        0 0 40px rgba(127, 140, 255, .28);
 
     pointer-events: none;
+
+    z-index: 5;
 }
 
-.particle-large {
-    offset-path: ellipse(275px 135px at 0 0);
 
+/* =========================================================
+   LARGE ORBIT
+   550 × 270
+   ========================================================= */
+
+.particle-large {
     animation:
-        electronLarge
+        orbitParticleLarge
         8s
         linear
         infinite;
 }
 
-.particle-medium {
-    offset-path: ellipse(232px 107px at 0 0);
+@keyframes orbitParticleLarge {
 
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(275px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(194.5px, 95.5px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 135px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-194.5px, 95.5px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-275px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-194.5px, -95.5px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -135px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(194.5px, -95.5px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(275px, 0);
+    }
+}
+
+
+/* =========================================================
+   MEDIUM ORBIT
+   465 × 215
+   ========================================================= */
+
+.particle-medium {
     animation:
-        electronMedium
+        orbitParticleMedium
         6s
         linear
         infinite reverse;
 }
 
-.particle-small {
-    offset-path: ellipse(175px 77px at 0 0);
+@keyframes orbitParticleMedium {
 
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(232.5px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(164.4px, 76px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 107.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-164.4px, 76px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-232.5px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-164.4px, -76px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -107.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(164.4px, -76px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(232.5px, 0);
+    }
+}
+
+
+/* =========================================================
+   SMALL ORBIT
+   350 × 155
+   ========================================================= */
+
+.particle-small {
     animation:
-        electronSmall
+        orbitParticleSmall
         4.5s
         linear
         infinite;
 }
 
-@keyframes electronLarge {
-    from {
-        offset-distance: 0%;
+@keyframes orbitParticleSmall {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(175px, 0);
     }
 
-    to {
-        offset-distance: 100%;
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(123.7px, 54.8px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 77.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-123.7px, 54.8px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-175px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-123.7px, -54.8px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -77.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(123.7px, -54.8px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(175px, 0);
     }
 }
-
-@keyframes electronMedium {
-    from {
-        offset-distance: 0%;
-    }
-
-    to {
-        offset-distance: 100%;
-    }
-}
-
-@keyframes electronSmall {
-    from {
-        offset-distance: 0%;
-    }
-
-    to {
-        offset-distance: 100%;
-    }
-}
-
 
 /* =========================================================
    HERO FORMULAS
