@@ -1,11 +1,13 @@
 /* =========================================================
-   PHYSICA — COMPLETE STYLESHEET
-   Dark scientific / glass / premium visual system
+   PHYSICA
+   Complete stylesheet
+   Dark scientific / glass / premium UI
    ========================================================= */
 
-/* =========================
-   FONTS + VARIABLES
-   ========================= */
+
+/* =========================================================
+   FONTS
+   ========================================================= */
 
 @font-face {
     font-family: "Tilda Sans ExtraBold";
@@ -15,9 +17,15 @@
     font-display: swap;
 }
 
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
 :root {
     --bg: #07090f;
     --bg-soft: #0a0d15;
+
     --panel: #0d111c;
     --panel-light: #111726;
 
@@ -38,9 +46,10 @@
     --radius-xl: 26px;
 }
 
-/* =========================
+
+/* =========================================================
    RESET
-   ========================= */
+   ========================================================= */
 
 * {
     box-sizing: border-box;
@@ -89,9 +98,10 @@ button {
     background: var(--accent);
 }
 
-/* =========================
+
+/* =========================================================
    NAVBAR
-   ========================= */
+   ========================================================= */
 
 .navbar {
     width: 100%;
@@ -131,7 +141,9 @@ button {
 
 .logo:hover {
     opacity: .88;
-    text-shadow: 0 0 24px rgba(127, 140, 255, .25);
+
+    text-shadow:
+        0 0 24px rgba(127, 140, 255, .25);
 }
 
 .navbar nav {
@@ -157,6 +169,7 @@ button {
     content: "";
 
     position: absolute;
+
     left: 0;
     bottom: -8px;
 
@@ -211,9 +224,10 @@ button {
         0 10px 30px rgba(127, 140, 255, .07);
 }
 
-/* =========================
+
+/* =========================================================
    BUTTONS
-   ========================= */
+   ========================================================= */
 
 .primary-button,
 .secondary-button {
@@ -273,9 +287,10 @@ button {
         0 12px 35px rgba(127, 140, 255, .06);
 }
 
-/* =========================
+
+/* =========================================================
    EYEBROW
-   ========================= */
+   ========================================================= */
 
 .eyebrow {
     margin: 0 0 24px;
@@ -289,9 +304,10 @@ button {
     text-transform: uppercase;
 }
 
-/* =========================
+
+/* =========================================================
    LANDING HERO
-   ========================= */
+   ========================================================= */
 
 .hero {
     width: min(1450px, 90%);
@@ -301,6 +317,7 @@ button {
 
     display: grid;
     grid-template-columns: .92fr 1.08fr;
+
     align-items: center;
 
     gap: 20px;
@@ -313,6 +330,7 @@ button {
 
 .hero h1 {
     max-width: 720px;
+
     margin: 0;
 
     font-family:
@@ -328,6 +346,7 @@ button {
 
 .hero h1 span {
     display: block;
+
     color: var(--accent);
 
     text-shadow:
@@ -351,9 +370,10 @@ button {
     gap: 14px;
 }
 
-/* =========================
+
+/* =========================================================
    HERO PHYSICS VISUAL
-   ========================= */
+   ========================================================= */
 
 .hero-visual {
     min-height: 620px;
@@ -412,6 +432,7 @@ button {
 
     left: 50%;
     top: 50%;
+
     z-index: 10;
 
     width: 100px;
@@ -438,19 +459,23 @@ button {
     animation: planetFloat 5s ease-in-out infinite;
 }
 
-/* =========================
-   STATIC ORBIT PLANES
-   ========================= */
+
+/* =========================================================
+   STATIC HERO ORBITS
+   ========================================================= */
 
 .orbit {
     position: absolute;
 
     left: 50%;
     top: 50%;
+
     z-index: 2;
 
     border: 1.5px solid rgba(125, 140, 255, .42);
     border-radius: 50%;
+
+    overflow: visible;
 }
 
 .orbit-large {
@@ -484,19 +509,10 @@ button {
         rotate(82deg);
 }
 
-/* =========================
-   HERO ORBIT ELECTRONS
-   ========================= */
 
-/*
-   The orbit itself stays completely still.
-   Each electron is positioned at the centre and animated
-   around an ellipse that matches its parent orbit.
-*/
-
-.orbit {
-    overflow: visible;
-}
+/* =========================================================
+   HERO PARTICLES
+   ========================================================= */
 
 .orbit .particle {
     position: absolute;
@@ -518,28 +534,36 @@ button {
         0 0 25px rgba(127, 140, 255, .75);
 
     pointer-events: none;
-
-    offset-anchor: center;
 }
-
-/*
-   Ellipse dimensions are based on the actual orbit sizes.
-   The particles follow the perimeter and inherit the orbit's tilt.
-*/
 
 .particle-large {
     offset-path: ellipse(275px 135px at 0 0);
-    animation: electronLarge 8s linear infinite;
+
+    animation:
+        electronLarge
+        8s
+        linear
+        infinite;
 }
 
 .particle-medium {
     offset-path: ellipse(232px 107px at 0 0);
-    animation: electronMedium 6s linear infinite reverse;
+
+    animation:
+        electronMedium
+        6s
+        linear
+        infinite reverse;
 }
 
 .particle-small {
     offset-path: ellipse(175px 77px at 0 0);
-    animation: electronSmall 4.5s linear infinite;
+
+    animation:
+        electronSmall
+        4.5s
+        linear
+        infinite;
 }
 
 @keyframes electronLarge {
@@ -572,15 +596,10 @@ button {
     }
 }
 
-@supports not (offset-path: ellipse(100px 50px at 0 0)) {
-    .orbit .particle {
-        display: none;
-    }
-}
 
-/* =========================
+/* =========================================================
    HERO FORMULAS
-   ========================= */
+   ========================================================= */
 
 .formula {
     position: absolute;
@@ -622,9 +641,10 @@ button {
     letter-spacing: 3px;
 }
 
-/* =========================
+
+/* =========================================================
    HERO ANIMATIONS
-   ========================= */
+   ========================================================= */
 
 @keyframes planetFloat {
     0%,
@@ -656,14 +676,16 @@ button {
     }
 }
 
-/* =========================
+
+/* =========================================================
    TOPICS
-   ========================= */
+   ========================================================= */
 
 .topics {
     width: min(1400px, 90%);
 
     margin: 0 auto;
+
     padding: 130px 0;
 }
 
@@ -680,6 +702,7 @@ button {
 .topics h2,
 .tutor-preview h2 {
     max-width: 850px;
+
     margin: 0;
 
     font-family:
@@ -704,7 +727,9 @@ button {
 
 .topic-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 14px;
 }
@@ -792,11 +817,13 @@ button {
 
     font-size: 23px;
 
-    transition: transform .3s ease;
+    transition:
+        transform .3s ease;
 }
 
 .topic-card:hover .topic-arrow {
-    transform: translate(4px, -4px);
+    transform:
+        translate(4px, -4px);
 }
 
 .topic-card h3 {
@@ -818,17 +845,20 @@ button {
     line-height: 1.6;
 }
 
-/* =========================
-   LANDING AI PREVIEW
-   ========================= */
+
+/* =========================================================
+   AI PREVIEW
+   ========================================================= */
 
 .tutor-preview {
     width: min(1400px, 90%);
 
     margin: 0 auto;
+
     padding: 80px 0 140px;
 
     display: grid;
+
     grid-template-columns: .78fr 1.22fr;
 
     gap: 70px;
@@ -838,6 +868,7 @@ button {
 
 .tutor-preview h2 span {
     display: block;
+
     color: var(--accent);
 }
 
@@ -852,9 +883,10 @@ button {
     line-height: 1.8;
 }
 
-/* =========================
+
+/* =========================================================
    PREVIEW CHAT
-   ========================= */
+   ========================================================= */
 
 .chat-preview {
     min-height: 550px;
@@ -888,6 +920,11 @@ button {
     border-bottom: 1px solid rgba(255, 255, 255, .07);
 }
 
+
+/* =========================================================
+   MINI AI AVATAR
+   ========================================================= */
+
 .mini-ai-avatar {
     width: 52px;
     height: 52px;
@@ -895,6 +932,10 @@ button {
     flex: 0 0 52px;
 
     position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border-radius: 50%;
 
@@ -915,15 +956,34 @@ button {
     width: 12px;
     height: 12px;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
-    background: #aab3ff;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #f1f3ff,
+            #aab3ff 42%,
+            #6875dc 100%
+        );
 
     box-shadow:
-        0 0 18px rgba(127, 140, 255, .95);
+        0 0 8px rgba(170, 179, 255, .95),
+        0 0 20px rgba(127, 140, 255, .75),
+        0 0 36px rgba(127, 140, 255, .32);
+
+    z-index: 5;
 }
+
+
+/* =========================================================
+   MINI AVATAR ORBITS
+   IMPORTANT:
+   ORBITS DO NOT ROTATE.
+   ONLY PARTICLES MOVE.
+   ========================================================= */
 
 .mini-orbit {
     position: absolute;
@@ -934,10 +994,17 @@ button {
     width: 46px;
     height: 19px;
 
+    margin: 0;
+
     border: 1px solid rgba(137, 149, 255, .72);
+
     border-radius: 50%;
 
-    transform: translate(-50%, -50%);
+    transform-origin: center center;
+
+    pointer-events: none;
+
+    z-index: 2;
 }
 
 .mini-one {
@@ -952,32 +1019,179 @@ button {
         rotate(55deg);
 }
 
+
+/* =========================================================
+   MINI AVATAR PARTICLES
+   ========================================================= */
+
 .mini-orbit span {
     position: absolute;
 
     left: 50%;
-    top: -3px;
+    top: 50%;
 
     width: 5px;
     height: 5px;
 
-    margin-left: -2.5px;
+    margin: -2.5px 0 0 -2.5px;
 
     border-radius: 50%;
 
-    background: #aab3ff;
+    background: #d2d7ff;
 
     box-shadow:
-        0 0 10px #8290ff;
+        0 0 7px rgba(170, 179, 255, 1),
+        0 0 15px rgba(127, 140, 255, .95),
+        0 0 25px rgba(127, 140, 255, .55);
+
+    z-index: 4;
 }
+
+
+/* FIRST PARTICLE */
 
 .mini-one span {
-    animation: avatarParticleOne 3.5s linear infinite;
+    animation:
+        miniParticleOne
+        3.6s
+        linear
+        infinite;
 }
 
+
+/* SECOND PARTICLE */
+
 .mini-two span {
-    animation: avatarParticleTwo 4s linear infinite reverse;
+    animation:
+        miniParticleTwo
+        4.4s
+        linear
+        infinite reverse;
 }
+
+
+/* =========================================================
+   MINI PARTICLE MOTION
+   ========================================================= */
+
+@keyframes miniParticleOne {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(23px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(16.3px, 6.7px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 9.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-16.3px, 6.7px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-23px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-16.3px, -6.7px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -9.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(16.3px, -6.7px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(23px, 0);
+    }
+}
+
+@keyframes miniParticleTwo {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(23px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(16.3px, 6.7px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 9.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-16.3px, 6.7px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-23px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-16.3px, -6.7px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -9.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(16.3px, -6.7px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(23px, 0);
+    }
+}
+
+
+/* =========================================================
+   PREVIEW IDENTITY
+   ========================================================= */
 
 .chat-identity {
     min-width: 0;
@@ -990,11 +1204,13 @@ button {
 
 .chat-identity strong {
     font-size: 16px;
+
     white-space: nowrap;
 }
 
 .chat-identity small {
     color: #737d99;
+
     font-size: 12px;
 }
 
@@ -1025,8 +1241,22 @@ button {
     box-shadow:
         0 0 12px rgba(127, 140, 255, .9);
 
-    animation: pulse 2s infinite;
+    animation:
+        pulse
+        2s
+        infinite;
 }
+
+@keyframes pulse {
+    50% {
+        opacity: .45;
+    }
+}
+
+
+/* =========================================================
+   PREVIEW MESSAGES
+   ========================================================= */
 
 .preview-messages {
     min-height: 360px;
@@ -1035,6 +1265,7 @@ button {
 
     display: flex;
     flex-direction: column;
+
     justify-content: center;
 
     gap: 14px;
@@ -1063,6 +1294,7 @@ button {
     align-self: flex-start;
 
     background: #171e2f;
+
     color: #f0f2f8;
 }
 
@@ -1070,6 +1302,7 @@ button {
     align-self: flex-end;
 
     background: var(--accent);
+
     color: #080a11;
 }
 
@@ -1104,19 +1337,22 @@ button {
     border-radius: 10px;
 
     color: #080a11;
+
     background: var(--accent);
 
     font-size: 19px;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-   ========================= */
+   ========================================================= */
 
 footer {
     width: min(1400px, 90%);
 
     margin: 0 auto;
+
     padding: 36px 0 48px;
 
     display: flex;
@@ -1145,6 +1381,7 @@ footer p {
     margin: 0;
 }
 
+
 /* =========================================================
    REAL AI TUTOR PAGE
    ========================================================= */
@@ -1160,12 +1397,18 @@ footer p {
     margin: 0 auto;
 
     display: grid;
+
     grid-template-columns: .72fr 1.28fr;
 
     gap: 70px;
 
     align-items: center;
 }
+
+
+/* =========================================================
+   TUTOR INTRO
+   ========================================================= */
 
 .real-tutor-intro h1 {
     max-width: 600px;
@@ -1201,7 +1444,11 @@ footer p {
         0 0 70px rgba(127, 140, 255, .12);
 }
 
-/* Actual ambient haze behind "physicist." */
+
+/* =========================================================
+   TITLE GLOW
+   ========================================================= */
+
 .real-tutor-intro h1 span::after {
     content: "";
 
@@ -1229,19 +1476,27 @@ footer p {
 
     pointer-events: none;
 
-    animation: titleHaze 4.5s ease-in-out infinite;
+    animation:
+        titleHaze
+        4.5s
+        ease-in-out
+        infinite;
 }
 
 @keyframes titleHaze {
     0%,
     100% {
         opacity: .65;
-        transform: scaleX(.94);
+
+        transform:
+            scaleX(.94);
     }
 
     50% {
         opacity: 1;
-        transform: scaleX(1.04);
+
+        transform:
+            scaleX(1.04);
     }
 }
 
@@ -1265,6 +1520,7 @@ footer p {
     padding: 10px 14px;
 
     border: 1px solid rgba(127, 140, 255, .18);
+
     border-radius: 999px;
 
     color: #aab1c7;
@@ -1289,9 +1545,10 @@ footer p {
         0 0 12px rgba(127, 140, 255, .9);
 }
 
-/* =========================
+
+/* =========================================================
    REAL CHAT
-   ========================= */
+   ========================================================= */
 
 .real-chat {
     min-height: 650px;
@@ -1303,6 +1560,7 @@ footer p {
     flex-direction: column;
 
     border: 1px solid rgba(255, 255, 255, .09);
+
     border-radius: 23px;
 
     background:
@@ -1326,7 +1584,8 @@ footer p {
     align-items: center;
     justify-content: space-between;
 
-    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    border-bottom:
+        1px solid rgba(255, 255, 255, .07);
 }
 
 .ai-identity {
@@ -1338,92 +1597,296 @@ footer p {
     min-width: 0;
 }
 
-/* =================================
-   PHYSICA AI AVATAR
-   Stable elliptical orbit system
-   ================================= */
+
+/* =========================================================
+   REAL AI AVATAR
+   ========================================================= */
 
 .ai-avatar {
     position: relative;
+
     width: 54px;
     height: 54px;
-    flex: 0 0 54px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+
+/* =========================================================
+   AVATAR CORE
+   ========================================================= */
 
 .avatar-core {
     position: absolute;
+
     left: 50%;
     top: 50%;
+
     width: 13px;
     height: 13px;
-    transform: translate(-50%, -50%);
+
+    transform:
+        translate(-50%, -50%);
+
     border-radius: 50%;
-    background: #aab3ff;
+
+    background:
+        radial-gradient(
+            circle at 35% 28%,
+            #f1f3ff 0%,
+            #b8c0ff 32%,
+            #8995ff 65%,
+            #6976dc 100%
+        );
+
     box-shadow:
-        0 0 10px rgba(170, 179, 255, .95),
-        0 0 24px rgba(127, 140, 255, .85),
-        0 0 42px rgba(127, 140, 255, .28);
-    z-index: 4;
+        0 0 8px rgba(170, 179, 255, 1),
+        0 0 20px rgba(127, 140, 255, .95),
+        0 0 40px rgba(127, 140, 255, .35);
+
+    z-index: 5;
 }
+
+
+/* =========================================================
+   REAL AVATAR ORBIT RINGS
+   ========================================================= */
 
 .avatar-orbit {
     position: absolute;
+
     left: 50%;
     top: 50%;
+
     width: 48px;
     height: 21px;
-    border: 1px solid rgba(137, 149, 255, .68);
+
+    margin: 0;
+
+    border:
+        1px solid rgba(137, 149, 255, .70);
+
     border-radius: 50%;
-    transform-origin: 50% 50%;
+
+    transform-origin:
+        center center;
+
     pointer-events: none;
+
     z-index: 2;
 }
 
+
+/*
+   IMPORTANT:
+   These transforms NEVER animate.
+
+   The ellipse stays completely still.
+*/
+
 .orbit-a {
-    transform: translate(-50%, -50%) rotate(-25deg);
+    transform:
+        translate(-50%, -50%)
+        rotate(-25deg);
 }
 
 .orbit-b {
-    transform: translate(-50%, -50%) rotate(55deg);
+    transform:
+        translate(-50%, -50%)
+        rotate(55deg);
 }
 
-/* The ellipse stays completely still. Only the light particle moves. */
+
+/* =========================================================
+   REAL AVATAR PARTICLES
+   ========================================================= */
+
 .avatar-orbit::after {
-    content: '';
+    content: "";
+
     position: absolute;
+
     left: 50%;
     top: 50%;
+
     width: 5px;
     height: 5px;
-    margin: -2.5px 0 0 -2.5px;
+
+    margin:
+        -2.5px 0 0 -2.5px;
+
     border-radius: 50%;
-    background: #d4d9ff;
+
+    background: #d1d6ff;
+
     box-shadow:
-        0 0 7px rgba(170, 179, 255, 1),
-        0 0 16px rgba(127, 140, 255, .95),
-        0 0 26px rgba(127, 140, 255, .45);
-    offset-path: ellipse(24px 10.5px at 0 0);
-    offset-rotate: 0deg;
-    will-change: offset-distance;
+        0 0 8px rgba(170, 179, 255, 1),
+        0 0 17px rgba(127, 140, 255, .95),
+        0 0 28px rgba(127, 140, 255, .55);
+
+    pointer-events: none;
+
+    z-index: 4;
 }
+
+
+/* =========================================================
+   ORBIT A PARTICLE
+   ========================================================= */
 
 .orbit-a::after {
-    animation: avatarParticleOne 3.6s linear infinite;
+    animation:
+        avatarParticleA
+        3.6s
+        linear
+        infinite;
 }
+
+
+/* =========================================================
+   ORBIT B PARTICLE
+   ========================================================= */
 
 .orbit-b::after {
-    animation: avatarParticleTwo 4.4s linear infinite reverse;
+    animation:
+        avatarParticleB
+        4.4s
+        linear
+        infinite reverse;
 }
 
-@keyframes avatarParticleOne {
-    from { offset-distance: 0%; }
-    to { offset-distance: 100%; }
+
+/* =========================================================
+   ORBIT A MOTION
+   ========================================================= */
+
+@keyframes avatarParticleA {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(24px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(17px, 7.4px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 10.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-17px, 7.4px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-24px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-17px, -7.4px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -10.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(17px, -7.4px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(24px, 0);
+    }
 }
 
-@keyframes avatarParticleTwo {
-    from { offset-distance: 0%; }
-    to { offset-distance: 100%; }
+
+/* =========================================================
+   ORBIT B MOTION
+   ========================================================= */
+
+@keyframes avatarParticleB {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(24px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(17px, 7.4px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 10.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-17px, 7.4px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-24px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-17px, -7.4px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -10.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(17px, -7.4px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(24px, 0);
+    }
 }
+
+
+/* =========================================================
+   AI NAME
+   ========================================================= */
 
 .ai-name {
     min-width: 0;
@@ -1436,14 +1899,22 @@ footer p {
 
 .ai-name strong {
     font-size: 16px;
+
     white-space: nowrap;
 }
 
 .ai-name small {
     color: #737d99;
+
     font-size: 12px;
+
     white-space: nowrap;
 }
+
+
+/* =========================================================
+   ONLINE STATUS
+   ========================================================= */
 
 .online-status {
     display: flex;
@@ -1470,18 +1941,16 @@ footer p {
     box-shadow:
         0 0 12px rgba(127, 140, 255, .9);
 
-    animation: pulse 2s infinite;
+    animation:
+        pulse
+        2s
+        infinite;
 }
 
-@keyframes pulse {
-    50% {
-        opacity: .45;
-    }
-}
 
-/* =========================
+/* =========================================================
    REAL MESSAGES
-   ========================= */
+   ========================================================= */
 
 .real-messages {
     flex: 1;
@@ -1497,6 +1966,7 @@ footer p {
     gap: 14px;
 
     scrollbar-width: thin;
+
     scrollbar-color:
         rgba(127, 140, 255, .35)
         transparent;
@@ -1512,11 +1982,14 @@ footer p {
 
 .real-messages::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background: rgba(127, 140, 255, .30);
+
+    background:
+        rgba(127, 140, 255, .30);
 }
 
 .real-messages .message {
     max-width: 80%;
+
     padding: 15px 18px;
 }
 
@@ -1550,6 +2023,7 @@ footer p {
 .real-messages .message.ai ul,
 .real-messages .message.ai ol {
     margin: 9px 0 9px 20px;
+
     padding-left: 14px;
 }
 
@@ -1562,7 +2036,8 @@ footer p {
 
     border-radius: 5px;
 
-    background: rgba(127, 140, 255, .10);
+    background:
+        rgba(127, 140, 255, .10);
 
     color: #b9c0ff;
 }
@@ -1573,6 +2048,7 @@ footer p {
 
 .math-block {
     margin: 14px 0;
+
     padding: 10px 0;
 
     overflow-x: auto;
@@ -1584,9 +2060,10 @@ footer p {
     color: #dfe2ff !important;
 }
 
-/* =========================
+
+/* =========================================================
    REAL CHAT INPUT — GLASS
-   ========================= */
+   ========================================================= */
 
 .real-chat-input {
     position: relative;
@@ -1600,14 +2077,11 @@ footer p {
 
     overflow: hidden;
 
-    border: 1px solid rgba(190, 198, 255, .28);
+    border:
+        1px solid rgba(190, 198, 255, .28);
+
     border-radius: 16px;
 
-    /*
-       Deliberately visible translucent glass.
-       The gradient provides the glass look even when
-       the background behind the form is very dark.
-    */
     background:
         linear-gradient(
             120deg,
@@ -1636,8 +2110,6 @@ footer p {
         box-shadow .25s ease;
 }
 
-/* Bright glass reflection */
-
 .real-chat-input::before {
     content: "";
 
@@ -1659,8 +2131,6 @@ footer p {
     pointer-events: none;
 }
 
-/* Soft blue light under the glass */
-
 .real-chat-input::after {
     content: "";
 
@@ -1674,7 +2144,8 @@ footer p {
 
     border-radius: 50%;
 
-    background: rgba(127, 140, 255, .20);
+    background:
+        rgba(127, 140, 255, .20);
 
     filter: blur(25px);
 
@@ -1686,6 +2157,7 @@ footer p {
     z-index: 2;
 
     min-width: 0;
+
     flex: 1;
 
     height: 62px;
@@ -1716,6 +2188,7 @@ footer p {
     margin-right: 7px;
 
     border: 0;
+
     border-radius: 11px;
 
     color: #080a11;
@@ -1733,7 +2206,8 @@ footer p {
 }
 
 .real-chat-input button:hover {
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
 
     background: #8d99ff;
 
@@ -1742,17 +2216,21 @@ footer p {
 }
 
 .real-chat-input button:active {
-    transform: translateY(0);
+    transform:
+        translateY(0);
 }
 
 .real-chat-input button:disabled {
     opacity: .45;
+
     cursor: default;
+
     box-shadow: none;
 }
 
 .real-chat-input:focus-within {
-    border-color: rgba(164, 174, 255, .55);
+    border-color:
+        rgba(164, 174, 255, .55);
 
     background:
         linear-gradient(
@@ -1770,6 +2248,7 @@ footer p {
 
 .chat-hint {
     margin: 0;
+
     padding: 0 20px 16px;
 
     color: #59637b;
@@ -1779,14 +2258,18 @@ footer p {
     font-size: 10px;
 }
 
-/* =========================
+
+/* =========================================================
    RESPONSIVE — TABLET
-   ========================= */
+   ========================================================= */
 
 @media (max-width: 1100px) {
+
     .hero {
         grid-template-columns: 1fr;
-        padding: 80px 0 100px;
+
+        padding:
+            80px 0 100px;
     }
 
     .hero-visual {
@@ -1794,32 +2277,41 @@ footer p {
     }
 
     .topic-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .tutor-preview {
         grid-template-columns: 1fr;
+
         gap: 55px;
     }
 
     .real-tutor {
         grid-template-columns: 1fr;
-        padding: 80px 0;
+
+        padding:
+            80px 0;
     }
 }
 
-/* =========================
+
+/* =========================================================
    RESPONSIVE — MOBILE
-   ========================= */
+   ========================================================= */
 
 @media (max-width: 700px) {
+
     .navbar {
         height: 76px;
-        padding: 0 6%;
+
+        padding:
+            0 6%;
     }
 
     .logo {
         font-size: 21px;
+
         letter-spacing: 4px;
     }
 
@@ -1829,9 +2321,11 @@ footer p {
 
     .nav-button {
         min-width: auto;
+
         height: 44px;
 
-        padding: 0 15px;
+        padding:
+            0 15px;
 
         font-size: 12px;
     }
@@ -1845,16 +2339,21 @@ footer p {
 
     .hero {
         min-height: auto;
-        padding: 70px 0;
+
+        padding:
+            70px 0;
     }
 
     .hero h1 {
-        font-size: clamp(50px, 14vw, 70px);
+        font-size:
+            clamp(50px, 14vw, 70px);
+
         letter-spacing: -2px;
     }
 
     .hero-buttons {
         flex-direction: column;
+
         align-items: stretch;
     }
 
@@ -1887,17 +2386,20 @@ footer p {
     }
 
     .topics {
-        padding: 90px 0;
+        padding:
+            90px 0;
     }
 
     .section-heading {
         display: block;
+
         margin-bottom: 40px;
     }
 
     .topics h2,
     .tutor-preview h2 {
         font-size: 46px;
+
         letter-spacing: -2px;
     }
 
@@ -1914,7 +2416,8 @@ footer p {
     }
 
     .tutor-preview {
-        padding: 60px 0 90px;
+        padding:
+            60px 0 90px;
     }
 
     .chat-preview {
@@ -1923,6 +2426,7 @@ footer p {
 
     .preview-messages {
         min-height: 300px;
+
         padding: 22px;
     }
 
@@ -1939,11 +2443,13 @@ footer p {
     }
 
     .real-tutor {
-        padding: 60px 0;
+        padding:
+            60px 0;
     }
 
     .real-tutor-intro h1 {
         font-size: 56px;
+
         letter-spacing: -2px;
     }
 
@@ -1955,7 +2461,8 @@ footer p {
     }
 
     .real-chat-header {
-        padding: 0 18px;
+        padding:
+            0 18px;
     }
 
     .real-messages {
@@ -1972,17 +2479,25 @@ footer p {
     }
 }
 
-/* =========================
+
+/* =========================================================
    REDUCED MOTION
-   ========================= */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
         scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
     }
 }
