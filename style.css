@@ -633,6 +633,80 @@ button {
         transform: translateY(-7px);
     }
 }
+
+/* =========================================================
+   LIVING ATOM ORBITS
+   ========================================================= */
+
+.orbit-large {
+    animation: orbitSpinLarge 16s linear infinite;
+}
+
+.orbit-medium {
+    animation: orbitSpinMedium 21s linear infinite reverse;
+}
+
+.orbit-small {
+    animation: orbitSpinSmall 13s linear infinite;
+}
+
+
+/* Large orbit */
+
+@keyframes orbitSpinLarge {
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(-24deg)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(-24deg)
+            rotate(360deg);
+    }
+}
+
+
+/* Medium orbit */
+
+@keyframes orbitSpinMedium {
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(32deg)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(32deg)
+            rotate(360deg);
+    }
+}
+
+
+/* Small orbit */
+
+@keyframes orbitSpinSmall {
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(82deg)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(82deg)
+            rotate(360deg);
+    }
+}
+
 /* =========================================================
    HERO FORMULAS
    ========================================================= */
@@ -1015,10 +1089,7 @@ button {
 
 
 /* =========================================================
-   MINI AVATAR ORBITS
-   IMPORTANT:
-   ORBITS DO NOT ROTATE.
-   ONLY PARTICLES MOVE.
+   MINI AI AVATAR
    ========================================================= */
 
 .mini-orbit {
@@ -1030,35 +1101,38 @@ button {
     width: 46px;
     height: 19px;
 
-    margin: 0;
-
     border: 1px solid rgba(137, 149, 255, .72);
-
     border-radius: 50%;
 
     transform-origin: center center;
-
-    pointer-events: none;
-
-    z-index: 2;
 }
+
+
+/* First orbit */
 
 .mini-one {
     transform:
         translate(-50%, -50%)
         rotate(-25deg);
+
+    animation:
+        miniOrbitOne 5s linear infinite;
 }
+
+
+/* Second orbit */
 
 .mini-two {
     transform:
         translate(-50%, -50%)
         rotate(55deg);
+
+    animation:
+        miniOrbitTwo 6.5s linear infinite reverse;
 }
 
 
-/* =========================================================
-   MINI AVATAR PARTICLES
-   ========================================================= */
+/* Particle */
 
 .mini-orbit span {
     position: absolute;
@@ -1069,43 +1143,108 @@ button {
     width: 5px;
     height: 5px;
 
-    margin: -2.5px 0 0 -2.5px;
+    margin-left: -2.5px;
+    margin-top: -2.5px;
 
     border-radius: 50%;
 
-    background: #d2d7ff;
+    background: #c5ccff;
 
     box-shadow:
-        0 0 7px rgba(170, 179, 255, 1),
-        0 0 15px rgba(127, 140, 255, .95),
-        0 0 25px rgba(127, 140, 255, .55);
+        0 0 7px #aab3ff,
+        0 0 15px rgba(127, 140, 255, .9);
 
-    z-index: 4;
+    offset-anchor: center;
+    offset-rotate: 0deg;
 }
 
 
-/* FIRST PARTICLE */
+/* Particle follows the actual ellipse */
 
 .mini-one span {
+    offset-path:
+        ellipse(23px 9.5px at 0 0);
+
     animation:
-        miniParticleOne
-        3.6s
-        linear
-        infinite;
+        miniParticleOne 3.5s linear infinite;
 }
 
-
-/* SECOND PARTICLE */
 
 .mini-two span {
+    offset-path:
+        ellipse(23px 9.5px at 0 0);
+
     animation:
-        miniParticleTwo
-        4.4s
-        linear
-        infinite reverse;
+        miniParticleTwo 4.5s linear infinite reverse;
 }
 
 
+/* =========================================================
+   MINI ORBIT ROTATION
+   ========================================================= */
+
+@keyframes miniOrbitOne {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(-25deg)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(-25deg)
+            rotate(360deg);
+    }
+}
+
+
+@keyframes miniOrbitTwo {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(55deg)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(55deg)
+            rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   MINI PARTICLES
+   ========================================================= */
+
+@keyframes miniParticleOne {
+
+    from {
+        offset-distance: 0%;
+    }
+
+    to {
+        offset-distance: 100%;
+    }
+}
+
+
+@keyframes miniParticleTwo {
+
+    from {
+        offset-distance: 0%;
+    }
+
+    to {
+        offset-distance: 100%;
+    }
+}
 /* =========================================================
    MINI PARTICLE MOTION
    ========================================================= */
