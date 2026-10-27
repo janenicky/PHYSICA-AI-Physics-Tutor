@@ -520,31 +520,37 @@ button {
    Only the particles move around their own ring.
    ========================================================= */
 
+/* =========================================================
+   PHYSICS ORBIT PARTICLES
+   Precisely matched to the real orbit dimensions
+   ========================================================= */
+
 .orbit .particle {
     position: absolute;
 
     left: 50%;
     top: 50%;
 
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
 
-    margin: -4.5px 0 0 -4.5px;
-
-    display: block;
+    margin-left: -4px;
+    margin-top: -4px;
 
     border-radius: 50%;
+
+    display: block;
 
     background: #c7cdff;
 
     box-shadow:
-        0 0 10px rgba(170, 179, 255, .95),
-        0 0 25px rgba(127, 140, 255, .75),
-        0 0 40px rgba(127, 140, 255, .28);
+        0 0 8px rgba(170, 179, 255, 1),
+        0 0 18px rgba(127, 140, 255, .9),
+        0 0 32px rgba(127, 140, 255, .35);
 
     pointer-events: none;
 
-    z-index: 5;
+    z-index: 10;
 }
 
 
@@ -554,14 +560,10 @@ button {
    ========================================================= */
 
 .particle-large {
-    animation:
-        orbitParticleLarge
-        8s
-        linear
-        infinite;
+    animation: particleLarge 8s linear infinite;
 }
 
-@keyframes orbitParticleLarge {
+@keyframes particleLarge {
 
     0% {
         transform:
@@ -572,7 +574,7 @@ button {
     12.5% {
         transform:
             translate(-50%, -50%)
-            translate(194.5px, 95.5px);
+            translate(194.45px, 95.46px);
     }
 
     25% {
@@ -584,7 +586,7 @@ button {
     37.5% {
         transform:
             translate(-50%, -50%)
-            translate(-194.5px, 95.5px);
+            translate(-194.45px, 95.46px);
     }
 
     50% {
@@ -596,7 +598,7 @@ button {
     62.5% {
         transform:
             translate(-50%, -50%)
-            translate(-194.5px, -95.5px);
+            translate(-194.45px, -95.46px);
     }
 
     75% {
@@ -608,7 +610,7 @@ button {
     87.5% {
         transform:
             translate(-50%, -50%)
-            translate(194.5px, -95.5px);
+            translate(194.45px, -95.46px);
     }
 
     100% {
@@ -619,6 +621,138 @@ button {
 }
 
 
+/* =========================================================
+   MEDIUM ORBIT
+   465 × 215
+   ========================================================= */
+
+.particle-medium {
+    animation: particleMedium 6.5s linear infinite reverse;
+}
+
+@keyframes particleMedium {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(232.5px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(164.40px, 76.01px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 107.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-164.40px, 76.01px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-232.5px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-164.40px, -76.01px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -107.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(164.40px, -76.01px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(232.5px, 0);
+    }
+}
+
+
+/* =========================================================
+   SMALL ORBIT
+   350 × 155
+   ========================================================= */
+
+.particle-small {
+    animation: particleSmall 5s linear infinite;
+}
+
+@keyframes particleSmall {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(175px, 0);
+    }
+
+    12.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(123.74px, 54.80px);
+    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 77.5px);
+    }
+
+    37.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-123.74px, 54.80px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate(-175px, 0);
+    }
+
+    62.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(-123.74px, -54.80px);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, -77.5px);
+    }
+
+    87.5% {
+        transform:
+            translate(-50%, -50%)
+            translate(123.74px, -54.80px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(175px, 0);
+    }
+}
 /* =========================================================
    MEDIUM ORBIT
    465 × 215
@@ -2662,5 +2796,27 @@ footer p {
 
         transition-duration:
             .01ms !important;
+    }
+}
+
+/* =========================================================
+   ATOM — SUBTLE FLOATING MOTION
+   ========================================================= */
+
+.physics-card {
+    animation: atomFloat 7s ease-in-out infinite;
+}
+
+@keyframes atomFloat {
+    0% {
+        transform: translateY(-7px);
+    }
+
+    50% {
+        transform: translateY(7px);
+    }
+
+    100% {
+        transform: translateY(-7px);
     }
 }
