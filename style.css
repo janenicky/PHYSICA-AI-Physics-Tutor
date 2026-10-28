@@ -945,280 +945,79 @@ button {
 
 
 /* =========================================================
-   MINI AI AVATAR
+   MINI AI AVATAR — STATIC ORBITS
    ========================================================= */
 
 .mini-orbit {
     position: absolute;
-
     left: 50%;
     top: 50%;
-
     width: 46px;
     height: 19px;
-
     border: 1px solid rgba(137, 149, 255, .72);
     border-radius: 50%;
-
     transform-origin: center center;
+    pointer-events: none;
 }
-
-
-/* First orbit */
 
 .mini-one {
-    transform:
-        translate(-50%, -50%)
-        rotate(-25deg);
-
-    animation:
-        miniOrbitOne 5s linear infinite;
+    transform: translate(-50%, -50%) rotate(-25deg);
 }
-
-
-/* Second orbit */
 
 .mini-two {
-    transform:
-        translate(-50%, -50%)
-        rotate(55deg);
-
-    animation:
-        miniOrbitTwo 6.5s linear infinite reverse;
+    transform: translate(-50%, -50%) rotate(55deg);
 }
 
-
-/* Particle */
+/* Glowing particles */
 
 .mini-orbit span {
     position: absolute;
-
     left: 50%;
     top: 50%;
-
     width: 5px;
     height: 5px;
-
-    margin-left: -2.5px;
-    margin-top: -2.5px;
-
+    margin: -2.5px 0 0 -2.5px;
     border-radius: 50%;
-
     background: #c5ccff;
-
     box-shadow:
         0 0 7px #aab3ff,
         0 0 15px rgba(127, 140, 255, .9);
-
-    offset-anchor: center;
-    offset-rotate: 0deg;
+    pointer-events: none;
 }
-
-
-/* Particle follows the actual ellipse */
 
 .mini-one span {
-    offset-path:
-        ellipse(23px 9.5px at 0 0);
-
-    animation:
-        miniParticleOne 3.5s linear infinite;
+    animation: miniParticleOne 5s linear infinite;
 }
-
 
 .mini-two span {
-    offset-path:
-        ellipse(23px 9.5px at 0 0);
-
-    animation:
-        miniParticleTwo 4.5s linear infinite reverse;
+    animation: miniParticleTwo 6s linear infinite reverse;
 }
 
-
-/* =========================================================
-   MINI ORBIT ROTATION
-   ========================================================= */
-
-@keyframes miniOrbitOne {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            rotate(-25deg)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            rotate(-25deg)
-            rotate(360deg);
-    }
-}
-
-
-@keyframes miniOrbitTwo {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            rotate(55deg)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            rotate(55deg)
-            rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   MINI PARTICLES
-   ========================================================= */
+/* Particle paths */
 
 @keyframes miniParticleOne {
-
-    from {
-        offset-distance: 0%;
-    }
-
-    to {
-        offset-distance: 100%;
-    }
-}
-
-
-@keyframes miniParticleTwo {
-
-    from {
-        offset-distance: 0%;
-    }
-
-    to {
-        offset-distance: 100%;
-    }
-}
-/* =========================================================
-   MINI PARTICLE MOTION
-   ========================================================= */
-
-@keyframes miniParticleOne {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            translate(23px, 0);
-    }
-
-    12.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(16.3px, 6.7px);
-    }
-
-    25% {
-        transform:
-            translate(-50%, -50%)
-            translate(0, 9.5px);
-    }
-
-    37.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(-16.3px, 6.7px);
-    }
-
-    50% {
-        transform:
-            translate(-50%, -50%)
-            translate(-23px, 0);
-    }
-
-    62.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(-16.3px, -6.7px);
-    }
-
-    75% {
-        transform:
-            translate(-50%, -50%)
-            translate(0, -9.5px);
-    }
-
-    87.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(16.3px, -6.7px);
-    }
-
-    100% {
-        transform:
-            translate(-50%, -50%)
-            translate(23px, 0);
-    }
+    0%   { transform: translate(23px, 0); }
+    12.5% { transform: translate(16.3px, 6.7px); }
+    25%  { transform: translate(0, 9.5px); }
+    37.5% { transform: translate(-16.3px, 6.7px); }
+    50%  { transform: translate(-23px, 0); }
+    62.5% { transform: translate(-16.3px, -6.7px); }
+    75%  { transform: translate(0, -9.5px); }
+    87.5% { transform: translate(16.3px, -6.7px); }
+    100% { transform: translate(23px, 0); }
 }
 
 @keyframes miniParticleTwo {
-
-    0% {
-        transform:
-            translate(-50%, -50%)
-            translate(23px, 0);
-    }
-
-    12.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(16.3px, 6.7px);
-    }
-
-    25% {
-        transform:
-            translate(-50%, -50%)
-            translate(0, 9.5px);
-    }
-
-    37.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(-16.3px, 6.7px);
-    }
-
-    50% {
-        transform:
-            translate(-50%, -50%)
-            translate(-23px, 0);
-    }
-
-    62.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(-16.3px, -6.7px);
-    }
-
-    75% {
-        transform:
-            translate(-50%, -50%)
-            translate(0, -9.5px);
-    }
-
-    87.5% {
-        transform:
-            translate(-50%, -50%)
-            translate(16.3px, -6.7px);
-    }
-
-    100% {
-        transform:
-            translate(-50%, -50%)
-            translate(23px, 0);
-    }
+    0%   { transform: translate(23px, 0); }
+    12.5% { transform: translate(16.3px, 6.7px); }
+    25%  { transform: translate(0, 9.5px); }
+    37.5% { transform: translate(-16.3px, 6.7px); }
+    50%  { transform: translate(-23px, 0); }
+    62.5% { transform: translate(-16.3px, -6.7px); }
+    75%  { transform: translate(0, -9.5px); }
+    87.5% { transform: translate(16.3px, -6.7px); }
+    100% { transform: translate(23px, 0); }
 }
-
 
 /* =========================================================
    PREVIEW IDENTITY
