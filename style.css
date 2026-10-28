@@ -459,251 +459,107 @@ button {
     animation: planetFloat 5s ease-in-out infinite;
 }
 
-
 /* =========================================================
-   STATIC HERO ORBITS
+   HERO ATOM — STATIC ORBITS, MOVING PARTICLES
    ========================================================= */
 
 .orbit {
     position: absolute;
-
     left: 50%;
     top: 50%;
-
     z-index: 2;
-
     border: 1.5px solid rgba(125, 140, 255, .42);
     border-radius: 50%;
-
     overflow: visible;
+    pointer-events: none;
 }
+
+/* Three fixed ellipses with different angles */
 
 .orbit-large {
     width: 550px;
     height: 270px;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(-24deg);
+    transform: translate(-50%, -50%) rotate(-24deg);
 }
 
 .orbit-medium {
     width: 465px;
     height: 215px;
-
     border-color: rgba(125, 140, 255, .52);
-
-    transform:
-        translate(-50%, -50%)
-        rotate(32deg);
+    transform: translate(-50%, -50%) rotate(32deg);
 }
 
 .orbit-small {
     width: 350px;
     height: 155px;
-
     border-color: rgba(125, 140, 255, .68);
-
-    transform:
-        translate(-50%, -50%)
-        rotate(82deg);
+    transform: translate(-50%, -50%) rotate(82deg);
 }
 
-
-/* =========================================================
-   PHYSICS ORBIT PARTICLES — FINAL
-   ========================================================= */
+/* Glowing particles */
 
 .orbit .particle {
     position: absolute;
-
+    left: 50%;
+    top: 50%;
     width: 8px;
     height: 8px;
-
     margin: -4px 0 0 -4px;
-
     border-radius: 50%;
-
     background: #c7cdff;
-
     box-shadow:
         0 0 8px rgba(170, 179, 255, 1),
         0 0 18px rgba(127, 140, 255, .9),
         0 0 32px rgba(127, 140, 255, .35);
-
     pointer-events: none;
-
     z-index: 10;
-
-    /*
-       IMPORTANT:
-       The path is centered in the orbit.
-       The particle follows the real ellipse,
-       not a polygon made from keyframes.
-    */
-
-    offset-position: 50% 50%;
-    offset-anchor: 50% 50%;
-    offset-rotate: 0deg;
 }
 
-
-/* =========================================================
-   LARGE
-   550 × 270
-   ========================================================= */
+/* Each particle follows its own ellipse */
 
 .particle-large {
     offset-path: ellipse(275px 135px at 50% 50%);
-    animation: particleLarge 8s linear infinite;
+    animation: particleLarge 12s linear infinite;
 }
-
-@keyframes particleLarge {
-    from {
-        offset-distance: 0%;
-    }
-
-    to {
-        offset-distance: 100%;
-    }
-}
-
-
-/* =========================================================
-   MEDIUM
-   465 × 215
-   ========================================================= */
 
 .particle-medium {
     offset-path: ellipse(232.5px 107.5px at 50% 50%);
-    animation: particleMedium 6.5s linear infinite reverse;
+    animation: particleMedium 10s linear infinite reverse;
 }
-
-@keyframes particleMedium {
-    from {
-        offset-distance: 0%;
-    }
-
-    to {
-        offset-distance: 100%;
-    }
-}
-
-
-/* =========================================================
-   SMALL
-   350 × 155
-   ========================================================= */
 
 .particle-small {
     offset-path: ellipse(175px 77.5px at 50% 50%);
-    animation: particleSmall 5s linear infinite;
+    animation: particleSmall 8s linear infinite;
+}
+
+@keyframes particleLarge {
+    from { offset-distance: 0%; }
+    to   { offset-distance: 100%; }
+}
+
+@keyframes particleMedium {
+    from { offset-distance: 0%; }
+    to   { offset-distance: 100%; }
 }
 
 @keyframes particleSmall {
-    from {
-        offset-distance: 0%;
-    }
-
-    to {
-        offset-distance: 100%;
-    }
+    from { offset-distance: 0%; }
+    to   { offset-distance: 100%; }
 }
 
-
-/* =========================================================
-   SOFT FLOATING ATOM
-   ========================================================= */
+/* Gentle floating motion */
 
 .physics-card {
-    animation: atomFloat 7s ease-in-out infinite;
+    animation: atomFloat 9s ease-in-out infinite;
 }
 
 @keyframes atomFloat {
-
-    0% {
-        transform: translateY(-7px);
+    0%, 100% {
+        translate: 0 -5px;
     }
 
     50% {
-        transform: translateY(7px);
-    }
-
-    100% {
-        transform: translateY(-7px);
-    }
-}
-
-/* =========================================================
-   LIVING ATOM ORBITS
-   ========================================================= */
-
-.orbit-large {
-    animation: orbitSpinLarge 16s linear infinite;
-}
-
-.orbit-medium {
-    animation: orbitSpinMedium 21s linear infinite reverse;
-}
-
-.orbit-small {
-    animation: orbitSpinSmall 13s linear infinite;
-}
-
-
-/* Large orbit */
-
-@keyframes orbitSpinLarge {
-    from {
-        transform:
-            translate(-50%, -50%)
-            rotate(-24deg)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            rotate(-24deg)
-            rotate(360deg);
-    }
-}
-
-
-/* Medium orbit */
-
-@keyframes orbitSpinMedium {
-    from {
-        transform:
-            translate(-50%, -50%)
-            rotate(32deg)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            rotate(32deg)
-            rotate(360deg);
-    }
-}
-
-
-/* Small orbit */
-
-@keyframes orbitSpinSmall {
-    from {
-        transform:
-            translate(-50%, -50%)
-            rotate(82deg)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            rotate(82deg)
-            rotate(360deg);
+        translate: 0 5px;
     }
 }
 
